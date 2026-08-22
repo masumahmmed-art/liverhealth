@@ -185,6 +185,38 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .calc-result.show{display:block}
 .calc-bmi{font-size:13px;color:var(--ink-soft);margin-bottom:6px}
 
+/* fatty liver index calculator */
+.fli-widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);max-width:640px;overflow:hidden;margin-top:28px}
+.fli-widget-header{padding:22px 24px 18px;border-bottom:1px solid var(--line)}
+.fli-eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 8px}
+.fli-widget-header h3{font-size:18px;margin:0 0 8px}
+.fli-lede{margin:0;color:var(--ink-soft);font-size:13.5px;line-height:1.55}
+.fli-widget-body{padding:22px 24px 24px}
+.fli-form{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fli-field{display:flex;flex-direction:column;gap:5px}
+.fli-field label{font-size:12.5px;font-weight:500;color:var(--ink-soft);display:flex;align-items:center;gap:6px}
+.fli-field label .fli-hint{font-weight:400;font-size:11px}
+.fli-field input,.fli-field select{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;font-size:13.5px;font-family:inherit;background:#fff}
+.fli-field input:focus,.fli-field select:focus{outline:2px solid var(--tp);outline-offset:1px;border-color:var(--tp)}
+.fli-unit-row{grid-column:1/-1;display:grid;grid-template-columns:2fr 1fr;gap:10px}
+.fli-unit-note{grid-column:1/-1;font-size:12px;color:var(--ink-soft);margin:-4px 0 0}
+.fli-results{display:none;margin-top:22px;padding-top:20px;border-top:1px dashed var(--line);scroll-margin-top:78px}
+.fli-results.show{display:block}
+.fli-results.just-shown{animation:fliPulse 1.4s ease}
+@keyframes fliPulse{0%{box-shadow:0 0 0 0 rgba(15,110,92,0.35)}70%{box-shadow:0 0 0 14px rgba(15,110,92,0)}100%{box-shadow:0 0 0 0 rgba(15,110,92,0)}}
+.fli-score-row{display:flex;align-items:baseline;gap:10px;margin-bottom:12px}
+.fli-score-num{font-family:'Fraunces',serif;font-size:36px;color:var(--tp-dark)}
+.fli-score-label{color:var(--ink-soft);font-size:12.5px}
+.fli-band-pill{display:inline-block;margin-bottom:14px;padding:5px 12px;border-radius:99px;font-size:12.5px;font-weight:600}
+.fli-meter{position:relative;height:10px;border-radius:99px;margin-bottom:6px;background:linear-gradient(to right,var(--ps) 0%,var(--ps) 30%,var(--wn) 30%,var(--wn) 60%,var(--dg) 60%,var(--dg) 100%)}
+.fli-marker{position:absolute;top:-5px;width:2px;height:20px;background:var(--ink);transition:left .4s ease}
+.fli-marker::after{content:"";position:absolute;left:50%;top:-6px;transform:translateX(-50%);width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid var(--ink)}
+.fli-zone-labels{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink-soft);margin-bottom:20px}
+.fli-explain{font-size:13.5px;line-height:1.6;color:var(--ink);padding:14px 16px;border-radius:10px;margin-bottom:20px}
+.fli-explain.low{background:var(--ps-bg)}
+.fli-explain.mid{background:var(--wn-bg)}
+.fli-explain.high{background:var(--dg-bg)}
+
 /* checklist */
 .lh-checklist{list-style:none;padding:0;margin:0 0 18px;display:flex;flex-direction:column;gap:8px}
 .lh-check-item{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer}
@@ -200,7 +232,7 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .lh-score-label{font-size:13px;color:var(--ink-soft)}
 
 .footer{text-align:center;color:var(--ink-soft);font-size:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line);line-height:1.7}
-@media(max-width:640px){.lh-hero{padding:36px 20px}.lh-hero h1{font-size:28px}.calc-row{grid-template-columns:1fr}}
+@media(max-width:640px){.lh-hero{padding:36px 20px}.lh-hero h1{font-size:28px}.calc-row{grid-template-columns:1fr}.fli-form{grid-template-columns:1fr}.fli-unit-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -512,6 +544,40 @@ LiverHealthHub
 <div style="text-align:center;margin-top:8px"><button class="lh-cta" onclick="runCalc()">Calculate My Risk</button></div>
 <div class="calc-result" id="calc-result"><h4 id="calc-title"></h4><div class="calc-bmi" id="calc-bmi"></div><p id="calc-msg" style="margin:0;font-size:13.5px;color:var(--ink-soft)"></p></div>
 </div>
+
+<div class="fli-widget">
+<div class="fli-widget-header">
+<p class="fli-eyebrow">Educational estimate · not a medical test</p>
+<h3>Curious About Your Liver Fat? Try This Estimate</h3>
+<p class="fli-lede">This tool gives an educational estimate based on a formula published in liver research, combining a few body measurements with two common blood-panel values. It takes under a minute if you have recent numbers on hand.</p>
+<p class="fli-lede" style="margin-top:12px"><strong>What these numbers mean:</strong> BMI (from height and weight) and waist circumference both reflect body fat, but waist circumference specifically flags abdominal fat, which is more closely tied to liver fat than BMI alone. <strong>GGT</strong> stands for <strong>gamma-glutamyl transferase</strong>, a liver enzyme reported on a standard blood/liver panel — it tends to rise when the liver is under strain. <strong>Triglycerides</strong> are a type of fat carried in your blood, and elevated levels are often associated with excess liver fat. The formula combines all four into a single 0–100 estimate.</p>
+<div class="lh-disclaimer" style="margin-top:14px"><strong>This is not a diagnostic tool.</strong> It cannot diagnose fatty liver or any other condition. Whatever your result — lower, mixed, or higher — it should be verified by a doctor or other qualified healthcare professional, who can arrange proper testing to find out what's actually going on with your liver.</div>
+</div>
+<div class="fli-widget-body">
+<form id="fli-form" novalidate>
+<div class="fli-field"><label for="fli-height">Height <span class="fli-hint">(cm)</span></label><input type="number" id="fli-height" placeholder="e.g. 175" min="100" max="230" step="0.1" required></div>
+<div class="fli-field"><label for="fli-weight">Weight <span class="fli-hint">(kg)</span></label><input type="number" id="fli-weight" placeholder="e.g. 78" min="30" max="300" step="0.1" required></div>
+<div class="fli-field"><label for="fli-waist">Waist circumference <span class="fli-hint">(cm)</span></label><input type="number" id="fli-waist" placeholder="e.g. 90" min="40" max="200" step="0.1" required></div>
+<div class="fli-field"><label for="fli-ggt">GGT <span class="fli-hint">(Gamma-Glutamyl Transferase, U/L)</span></label><input type="number" id="fli-ggt" placeholder="e.g. 25" min="1" max="1000" step="0.1" required></div>
+<div class="fli-unit-row">
+<div class="fli-field"><label for="fli-trig">Triglycerides</label><input type="number" id="fli-trig" placeholder="e.g. 120" min="10" max="2000" step="0.1" required></div>
+<div class="fli-field"><label for="fli-trig-unit">Unit</label><select id="fli-trig-unit"><option value="mgdl">mg/dL (US)</option><option value="mmoll">mmol/L (AU/UK/EU)</option></select></div>
+</div>
+<p class="fli-unit-note">GGT and triglycerides come from a standard blood/liver panel. Not sure which unit your lab used for triglycerides? US labs usually report mg/dL; most labs in Australia, the UK, and the EU report mmol/L — check your results sheet if unsure.</p>
+<div style="grid-column:1/-1;text-align:center;margin-top:4px"><button type="submit" class="lh-cta">Get My Estimate</button></div>
+</form>
+
+<div class="fli-results" id="fli-results" aria-live="polite">
+<div class="fli-score-row"><span class="fli-score-num" id="fli-scoreNum">–</span><span class="fli-score-label">/ 100 · Liver Fat Estimate</span></div>
+<span class="fli-band-pill" id="fli-bandPill">–</span>
+<div class="fli-meter"><div class="fli-marker" id="fli-marker" style="left:0%"></div></div>
+<div class="fli-zone-labels"><span>0 · Lower</span><span>30 · Mixed</span><span>60 · Higher</span><span>100</span></div>
+<div class="fli-explain" id="fli-explain"></div>
+
+<div class="lh-disclaimer"><strong>Not a diagnostic tool.</strong> This estimate is calculated using a formula published in peer-reviewed research (Bedogni et al., <em>BMC Gastroenterology</em>, 2006) for educational purposes only, so anyone who wants to verify the math can do so. It does not diagnose fatty liver disease or any other condition and is not a substitute for professional medical advice. Whatever your result, only a healthcare provider — using proper testing such as blood work or an ultrasound — can tell you what's actually happening with your liver.</div>
+</div>
+</div>
+</div>
 </div>
 
 <!-- SELF-CHECK -->
@@ -622,6 +688,69 @@ function runCalc(){
   document.getElementById('calc-title').textContent = title;
   document.getElementById('calc-msg').textContent = msg;
 }
+
+/* Fatty Liver Index (FLI) calculator — Bedogni et al., BMC Gastroenterology 2006 */
+(function(){
+  const fliForm = document.getElementById('fli-form');
+  if(!fliForm) return;
+  fliForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const heightCm = parseFloat(document.getElementById('fli-height').value);
+    const weightKg = parseFloat(document.getElementById('fli-weight').value);
+    const waist = parseFloat(document.getElementById('fli-waist').value);
+    const ggt = parseFloat(document.getElementById('fli-ggt').value);
+    let trig = parseFloat(document.getElementById('fli-trig').value);
+    const trigUnit = document.getElementById('fli-trig-unit').value;
+    const fliFields = [
+      {id:'fli-height', name:'Height', val:heightCm},
+      {id:'fli-weight', name:'Weight', val:weightKg},
+      {id:'fli-waist', name:'Waist circumference', val:waist},
+      {id:'fli-ggt', name:'GGT', val:ggt},
+      {id:'fli-trig', name:'Triglycerides', val:trig}
+    ];
+    const fliBadField = fliFields.find(function(f){ return isNaN(f.val) || f.val <= 0; });
+    if(fliBadField){
+      alert('Please enter a valid, positive number for "'+fliBadField.name+'" before calculating.');
+      document.getElementById(fliBadField.id).focus();
+      return;
+    }
+    if(trigUnit === 'mmoll'){ trig = trig * 88.5; } // convert mmol/L to mg/dL
+    const heightM = heightCm / 100;
+    const bmi = weightKg / (heightM * heightM);
+    const x = 0.953*Math.log(trig) + 0.139*bmi + 0.718*Math.log(ggt) + 0.053*waist - 15.745;
+    const fli = (Math.exp(x) / (1 + Math.exp(x))) * 100;
+    const fliClamped = Math.min(100, Math.max(0, fli));
+
+    document.getElementById('fli-scoreNum').textContent = fliClamped.toFixed(1);
+    document.getElementById('fli-marker').style.left = fliClamped + '%';
+
+    const pillEl = document.getElementById('fli-bandPill');
+    const explainEl = document.getElementById('fli-explain');
+    let band, pillBg, pillColor, explainClass, explainHtml;
+    if(fliClamped < 30){
+      band = 'Lower'; pillBg = 'var(--ps-bg)'; pillColor = 'var(--ps)'; explainClass = 'low';
+      explainHtml = 'Your estimate of '+fliClamped.toFixed(1)+' falls in the lower range — this pattern is not typically associated with excess liver fat. <strong>This is not a diagnosis.</strong> Keep up routine check-ups, and mention this estimate to your doctor if you have any liver-related symptoms or concerns.';
+    } else if(fliClamped < 60){
+      band = 'Mixed'; pillBg = 'var(--wn-bg)'; pillColor = 'var(--wn)'; explainClass = 'mid';
+      explainHtml = 'Your estimate of '+fliClamped.toFixed(1)+' falls in the mixed range (30–60) — on its own, this estimate can\'t say much either way. <strong>This is not a diagnosis.</strong> A conversation with a doctor about further testing is the best way to find out more.';
+    } else {
+      band = 'Higher'; pillBg = 'var(--dg-bg)'; pillColor = 'var(--dg)'; explainClass = 'high';
+      explainHtml = 'Your estimate of '+fliClamped.toFixed(1)+' falls in the higher range — this pattern is more often seen in people with excess liver fat. <strong>This is not a diagnosis.</strong> Please discuss this estimate with a healthcare provider, who can arrange proper testing (such as an ultrasound) to find out what\'s actually going on.';
+    }
+    pillEl.textContent = band;
+    pillEl.style.background = pillBg;
+    pillEl.style.color = pillColor;
+    explainEl.className = 'fli-explain ' + explainClass;
+    explainEl.innerHTML = explainHtml;
+
+    const resultsEl = document.getElementById('fli-results');
+    resultsEl.classList.add('show');
+    resultsEl.classList.remove('just-shown');
+    void resultsEl.offsetWidth; // restart the highlight animation on repeat calculations
+    resultsEl.classList.add('just-shown');
+    resultsEl.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+})();
 </script>
 </body>
 </html>
