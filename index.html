@@ -168,6 +168,13 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .supp-detail.open{display:block}
 .supp-detail ul{margin:6px 0 0;padding-left:18px}
 .affiliate-banner{background:var(--wn-bg);border:1px solid #F0DDB0;border-radius:12px;padding:12px 16px;font-size:12.5px;color:#7A5410;margin-bottom:18px}
+.lh-region-picker{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:18px}
+.lh-region-label{font-size:12.5px;color:var(--ink-soft);font-weight:600;margin-right:2px}
+.lh-region-btn{background:var(--card);border:1px solid var(--line);color:var(--ink);font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:99px;cursor:pointer}
+.lh-region-btn:hover{border-color:var(--tp);color:var(--tp-dark)}
+.lh-region-btn.active{background:var(--tp);border-color:var(--tp);color:#fff}
+.lh-region-note{margin:0 0 6px;font-size:12px;color:var(--ink-soft)}
+.lh-region-empty{background:var(--sm);border-radius:10px;padding:14px 16px;font-size:13.5px;color:var(--ink-soft);margin-bottom:14px}
 
 /* calculator */
 .calc-form{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;max-width:560px}
@@ -414,45 +421,59 @@ LiverHealthHub
 
 <!-- SUPPLEMENTS -->
 <div id="supplements" class="lh-section" role="tabpanel">
-<h2>TGA-Registered Liver Support</h2>
+<h2>Liver Support Supplements</h2>
 <div class="affiliate-banner"><strong>Advertising disclosure:</strong> This page contains affiliate links. If you buy through them, we may earn a commission at no extra cost to you. This never affects which information we present, and inclusion here is not a medical endorsement.</div>
-<p class="lh-subnote">These supplement categories are commonly TGA-listed in Australia for liver support. Always consult your doctor before starting any supplement.</p>
+<p class="lh-subnote">Products featured here may be TGA-listed medicines, food-classified supplements, US dietary supplements regulated under FDA/DSHEA, or supplements notified under an EU member state's food supplement rules — each has a different regulatory basis, noted where relevant. Always consult your doctor before starting any supplement.</p>
 
-<div class="lh-affiliate">
+<div class="lh-region-picker" role="group" aria-label="Filter supplements by region">
+<span class="lh-region-label">Shopping from:</span>
+<button type="button" class="lh-region-btn active" data-region-filter="ALL" onclick="setRegion('ALL',this)">All Regions</button>
+<button type="button" class="lh-region-btn" data-region-filter="AU" onclick="setRegion('AU',this)">🇦🇺 Australia</button>
+<button type="button" class="lh-region-btn" data-region-filter="US" onclick="setRegion('US',this)">🇺🇸 United States</button>
+<button type="button" class="lh-region-btn" data-region-filter="EU" onclick="setRegion('EU',this)">🇪🇺 European Union</button>
+</div>
+
+<div class="lh-affiliate" data-region="AU US EU">
 <div class="lh-affiliate-top"><h4>Milk Thistle (Silymarin)</h4><span class="lh-price-tag">From $19.95</span></div>
-<p>The most studied herbal supplement for liver support. TGA-registered products are typically standardised to 80% silymarin, often used for antioxidant and anti-inflammatory support.</p>
+<p>The most studied herbal supplement for liver support, often standardised to 80% silymarin, used for antioxidant and anti-inflammatory support.</p>
+<p class="lh-region-note">Available in: 🇦🇺 Australia · 🇺🇸 United States · 🇪🇺 European Union</p>
 <div class="lh-affiliate-actions"><button class="lh-cta" onclick="alert('Add your affiliate link here, e.g. Chemist Warehouse, iHerb, or a specific brand partner.')">Shop Now →</button><button class="lh-cta secondary" onclick="toggleDetail(this)">Learn More</button></div>
 <div class="supp-detail"><strong>Key points:</strong><ul><li>Standardised extract: 140–420 mg silymarin daily</li><li>Best evidence for Amanita mushroom poisoning and toxin-related liver injury</li><li>Mixed evidence for MASLD; may modestly improve liver enzymes</li><li>Generally well tolerated; rare mild digestive upset</li><li>May interact with medications metabolised by CYP450 enzymes</li></ul></div>
 </div>
 
-<div class="lh-affiliate">
+<div class="lh-affiliate" data-region="AU US EU">
 <div class="lh-affiliate-top"><h4>N-Acetyl Cysteine (NAC)</h4><span class="lh-price-tag">From $24.50</span></div>
-<p>A precursor to glutathione, the liver's master antioxidant. TGA-registered NAC supports the body's natural detoxification pathways.</p>
+<p>A precursor to glutathione, the liver's master antioxidant. NAC supports the body's natural detoxification pathways.</p>
+<p class="lh-region-note">Available in: 🇦🇺 Australia · 🇺🇸 United States · 🇪🇺 European Union</p>
 <div class="lh-affiliate-actions"><button class="lh-cta" onclick="alert('Add your affiliate link here.')">Shop Now →</button><button class="lh-cta secondary" onclick="toggleDetail(this)">Learn More</button></div>
 <div class="supp-detail"><strong>Key points:</strong><ul><li>Common dose: 600–1,200 mg daily (medical supervision for higher doses)</li><li>Primary clinical use: paracetamol overdose antidote in hospitals</li><li>May support glutathione levels under oxidative stress</li><li>Some evidence for insulin resistance in PCOS/metabolic syndrome</li><li>Can cause nausea at higher doses — take with food</li></ul></div>
 </div>
 
-<div class="lh-affiliate">
+<div class="lh-affiliate" data-region="AU US EU">
 <div class="lh-affiliate-top"><h4>Vitamin E (Mixed Tocopherols)</h4><span class="lh-price-tag">From $16.90</span></div>
-<p>High-quality TGA-registered vitamin E is sometimes used for MASLD/MASH under medical supervision.</p>
+<p>High-quality vitamin E is sometimes used for MASLD/MASH under medical supervision.</p>
+<p class="lh-region-note">Available in: 🇦🇺 Australia · 🇺🇸 United States · 🇪🇺 European Union</p>
 <div class="lh-affiliate-actions"><button class="lh-cta" onclick="alert('Add your affiliate link here.')">Shop Now →</button><button class="lh-cta secondary" onclick="toggleDetail(this)">Learn More</button></div>
 <div class="supp-detail"><strong>Key points:</strong><ul><li>Studied dose for NASH: 800 IU/day of mixed tocopherols</li><li>Shown in some trials to reduce liver enzymes and steatosis</li><li>Not recommended for people with diabetes or heart disease without medical oversight</li><li>High doses may raise bleeding risk — stop before surgery</li><li>Look for "mixed tocopherols" rather than synthetic dl-alpha-tocopherol</li></ul></div>
 </div>
 
-<div class="lh-affiliate">
+<div class="lh-affiliate" data-region="AU US EU">
 <div class="lh-affiliate-top"><h4>Omega-3 Fish Oil</h4><span class="lh-price-tag">From $22.00</span></div>
 <p>High-EPA/DHA omega-3s may help reduce liver fat and inflammation markers in people with MASLD.</p>
+<p class="lh-region-note">Available in: 🇦🇺 Australia · 🇺🇸 United States · 🇪🇺 European Union</p>
 <div class="lh-affiliate-actions"><button class="lh-cta" onclick="alert('Add your affiliate link here.')">Shop Now →</button><button class="lh-cta secondary" onclick="toggleDetail(this)">Learn More</button></div>
 <div class="supp-detail"><strong>Key points:</strong><ul><li>Effective dose: 2–4 g combined EPA+DHA daily</li><li>Associated with reduced liver fat and improved liver enzymes in meta-analyses</li><li>Also benefits triglycerides and cardiovascular health</li><li>Choose molecularly distilled products to avoid contaminants</li><li>May increase bleeding risk at high doses — caution with anticoagulants</li></ul></div>
 </div>
 
+<p class="lh-region-empty" id="regionEmptyMsg" style="display:none">No listed products match this region yet — check back soon, or use "All Regions" to see everything.</p>
+
 <div class="lh-affiliate" id="submit-product">
 <div class="lh-affiliate-top"><h4>Are You a Supplement Brand?</h4></div>
-<p>If you make a TGA-registered liver-support supplement and would like it considered for featuring on this page, submit your product details for review. Every submission is checked before anything goes live.</p>
+<p>If you make a liver-support supplement that's legally sold in Australia, the United States, and/or the European Union and would like it considered for featuring on this page, submit your product details for review — including which regions it's legally available in. Every submission is checked before anything goes live.</p>
 <div class="lh-affiliate-actions"><a class="lh-cta" href="https://www.cognitoforms.com/masum4/supplierproductsubmissionliverhealthhub" target="_blank" rel="noopener">Submit Your Product →</a></div>
 </div>
 
-<div class="lh-disclaimer"><strong>Important:</strong> This site is for educational awareness only — not medical advice. TGA registration means a product is listed on the Australian Register of Therapeutic Goods; it does not mean the TGA has endorsed its effectiveness for liver disease. Always consult a qualified healthcare provider before taking any supplement, especially with existing liver conditions or other medications.</div>
+<div class="lh-disclaimer"><strong>Important:</strong> This site is for educational awareness only — not medical advice. Regulatory status varies by product: TGA listing (AUST L) or registration (AUST R) means a product is on the Australian Register of Therapeutic Goods, but does not mean the TGA has endorsed its effectiveness for liver disease. Some products are instead classified as foods under FSANZ, or as dietary supplements in the United States under FDA/DSHEA — in the US, the FDA does not review or approve supplements before they're sold. None of these classifications are a guarantee of safety or effectiveness. Always consult a qualified healthcare provider before taking any supplement, especially with existing liver conditions or other medications.</div>
 </div>
 
 <!-- CALCULATOR -->
@@ -534,6 +555,26 @@ function toggleDetail(btn){
   d.classList.toggle('open');
   btn.textContent = d.classList.contains('open') ? 'Hide Details' : 'Learn More';
 }
+function setRegion(region, btn){
+  document.querySelectorAll('.lh-region-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  let visibleCount = 0;
+  document.querySelectorAll('#supplements [data-region]').forEach(function(card){
+    const regions = card.getAttribute('data-region').split(' ');
+    const show = (region === 'ALL' || regions.indexOf(region) !== -1);
+    card.style.display = show ? '' : 'none';
+    if(show) visibleCount++;
+  });
+  const emptyMsg = document.getElementById('regionEmptyMsg');
+  if(emptyMsg) emptyMsg.style.display = (visibleCount === 0) ? 'block' : 'none';
+  try{ localStorage.setItem('lhRegion', region); }catch(e){}
+}
+document.addEventListener('DOMContentLoaded', function(){
+  let saved = 'ALL';
+  try{ saved = localStorage.getItem('lhRegion') || 'ALL'; }catch(e){}
+  const btn = document.querySelector('.lh-region-btn[data-region-filter="'+saved+'"]');
+  setRegion(saved, btn);
+});
 function toggleCheck(item){
   item.classList.toggle('checked');
   const total = document.querySelectorAll('.lh-check-item').length;
