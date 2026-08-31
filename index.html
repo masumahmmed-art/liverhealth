@@ -138,8 +138,13 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 
 /* colorful photo strip */
 .lh-photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0 26px;border-radius:var(--radius);overflow:hidden}
+.lh-real-banner{width:100%;height:280px;object-fit:cover;object-position:center 20%;border-radius:var(--radius);margin:20px 0;display:block}
+.lh-real-compare{width:100%;height:auto;border-radius:var(--radius);margin:6px 0 22px;display:block}
+@media(max-width:640px){.lh-real-banner{height:190px}}
 .lh-photo{aspect-ratio:4/3;border-radius:12px;position:relative;overflow:hidden;display:flex;align-items:flex-end}
-.lh-photo span{position:relative;color:#fff;font-size:12.5px;font-weight:600;padding:10px 12px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.lh-photo span{position:relative;z-index:1;color:#fff;font-size:12.5px;font-weight:600;padding:10px 12px;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.lh-photo-illus{position:absolute;top:6px;left:0;right:0;bottom:38px;display:flex;align-items:center;justify-content:center}
+.lh-photo-illus svg{width:auto;height:80%;max-width:80%}
 .lh-photo::before{content:"";position:absolute;inset:0}
 .lh-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.55));}
 .p1::before{background:linear-gradient(135deg,#2F9E6E,#0B4F42),url('') }
@@ -356,6 +361,8 @@ LiverHealthHub
 </div>
 </div>
 
+<img class="lh-real-banner" src="images/liver-hero-banner.jpg" alt="Illustration of the liver's location in the body, surrounded by liver-friendly foods like leafy greens, tomatoes, avocado, and olive oil">
+
 <!-- ABOUT -->
 <div id="about" class="lh-section active" role="tabpanel">
 <h2>What Your Liver Does</h2>
@@ -369,17 +376,14 @@ LiverHealthHub
 <div class="lh-card"><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><rect x="16" y="8" width="16" height="24" rx="4" stroke="#F0805F" stroke-width="1.5" fill="#FBEAE7"/><circle cx="24" cy="40" r="3" stroke="#F0805F" stroke-width="1.2" fill="none"/></svg><h3>Processes Medications</h3><p>Metabolizes most drugs you take — a big reason liver health affects how medicines work in your body.</p></div>
 </div>
 
-<div class="lh-photo-strip">
-<div class="lh-photo p1"><span>Whole-food nutrition supports liver function</span></div>
-<div class="lh-photo p2"><span>Regular movement lowers liver fat</span></div>
-<div class="lh-photo p3"><span>Routine check-ups catch problems early</span></div>
-</div>
+<img class="lh-real-compare" src="images/fatty-vs-healthy-liver.jpg" alt="Comparison of a fatty liver versus a healthy liver, alongside liver-friendly foods">
 </div>
 
 <!-- RISKS -->
 <div id="risks" class="lh-section" role="tabpanel">
 <h2>Risk Factors</h2>
 <p class="lh-subnote">Some risks are lifestyle-driven and modifiable; others are genetic or viral. Knowing yours helps you decide when to get tested.</p>
+<img class="lh-real-compare" src="images/unhealthy-vs-healthy-liver.jpg" alt="Side-by-side comparison of an unhealthy liver and a healthy liver">
 <div class="lh-grid">
 <div class="lh-card"><span class="lh-badge risk">High Risk</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><path d="M16 12 L20 12 L20 36 Q20 40 24 40 Q28 40 28 36 L28 12 L32 12" stroke="#C64B3C" stroke-width="1.5" fill="#FBEAE7"/></svg><h3>Excess Alcohol</h3><p>Regular heavy drinking is a leading cause of liver disease. Even moderate drinking adds strain over time.</p></div>
 <div class="lh-card"><span class="lh-badge risk">High Risk</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="#C64B3C" stroke-width="1.5" fill="#FBEAE7"/><path d="M18 20 Q24 14 30 20 Q32 26 24 34 Q16 26 18 20Z" stroke="#C64B3C" stroke-width="1.2" fill="none"/></svg><h3>Obesity &amp; Diabetes</h3><p>Metabolic dysfunction-associated steatotic liver disease (MASLD) affects roughly 1 in 4 adults globally and is often silent until advanced.</p></div>
@@ -433,9 +437,9 @@ LiverHealthHub
 <div class="lh-card"><span class="lh-badge warn">Limit</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><rect x="14" y="14" width="20" height="20" rx="4" stroke="#C6821E" stroke-width="1.5" fill="#FBF1E1"/></svg><h3>Processed Foods</h3><p>Trans fats, preservatives, and high sodium make the liver work harder. Cook fresh meals where you can.</p></div>
 </div>
 <div class="lh-photo-strip">
-<div class="lh-photo p1"><span>Colorful vegetables, fewer processed extras</span></div>
-<div class="lh-photo p3"><span>Coffee is one of the few drinks linked to liver protection</span></div>
-<div class="lh-photo p2"><span>Omega-3-rich fish, twice a week</span></div>
+<div class="lh-photo p1"><div class="lh-photo-illus"><svg viewBox="0 0 100 100" fill="none"><circle cx="38" cy="34" r="20" fill="rgba(255,255,255,0.18)" stroke="#fff" stroke-width="2"/><circle cx="24" cy="24" r="12" fill="rgba(255,255,255,0.18)" stroke="#fff" stroke-width="2"/><circle cx="52" cy="22" r="12" fill="rgba(255,255,255,0.18)" stroke="#fff" stroke-width="2"/><rect x="33" y="48" width="10" height="22" rx="3" fill="rgba(255,255,255,0.18)" stroke="#fff" stroke-width="2"/><circle cx="74" cy="56" r="16" fill="rgba(255,255,255,0.18)" stroke="#fff" stroke-width="2"/><path d="M74 40 Q70 34 66 36 M74 40 Q78 34 82 36" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div><span>Colorful vegetables, fewer processed extras</span></div>
+<div class="lh-photo p3"><div class="lh-photo-illus"><svg viewBox="0 0 100 100" fill="none"><path d="M26 40 L74 40 L70 76 Q70 84 60 84 L40 84 Q30 84 30 76 Z" fill="rgba(255,255,255,0.18)" stroke="#fff" stroke-width="2"/><path d="M74 46 Q90 46 90 58 Q90 70 74 68" stroke="#fff" stroke-width="2" fill="none"/><path d="M40 30 Q36 24 40 18 M50 30 Q46 24 50 18 M60 30 Q56 24 60 18" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none"/></svg></div><span>Coffee is one of the few drinks linked to liver protection</span></div>
+<div class="lh-photo p2"><div class="lh-photo-illus"><svg viewBox="0 0 120 80" fill="none"><path d="M18 40 Q35 14 70 22 Q95 28 108 40 Q95 52 70 58 Q35 66 18 40Z" fill="rgba(255,255,255,0.18)" stroke="#fff" stroke-width="2"/><path d="M14 40 L2 26 L2 54 Z" fill="rgba(255,255,255,0.18)" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><circle cx="80" cy="34" r="3" fill="#fff"/><path d="M48 28 Q52 40 48 52 M64 25 Q68 40 64 55" stroke="#fff" stroke-width="1.6" fill="none"/></svg></div><span>Omega-3-rich fish, twice a week</span></div>
 </div>
 </div>
 
