@@ -28,6 +28,22 @@
   "inLanguage": "en"
 }
 </script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What's the difference between fatty liver, MASLD, and MASH?", "acceptedAnswer": {"@type": "Answer", "text": "\"Fatty liver\" describes fat build-up in the liver. MASLD (metabolic dysfunction-associated steatotic liver disease) is the current clinical term for fatty liver linked to metabolic risk factors like obesity, type 2 diabetes, or high cholesterol. MASH (metabolic dysfunction-associated steatohepatitis) is the more advanced, inflamed form of MASLD that carries a higher risk of progressing to fibrosis or cirrhosis."}},
+    {"@type": "Question", "name": "Can fatty liver actually be reversed?", "acceptedAnswer": {"@type": "Answer", "text": "In its early stages, yes, often within weeks to months. Weight loss of just 5-10% of body weight, reduced alcohol and added sugar intake, and regular exercise are all linked to measurable reductions in liver fat. Once significant scarring (fibrosis or cirrhosis) has developed, damage is generally no longer reversible."}},
+    {"@type": "Question", "name": "How much alcohol is actually safe for my liver?", "acceptedAnswer": {"@type": "Answer", "text": "There's no universally safe amount. U.S. clinical guidelines describe more than 14 drinks/week for men, or 7 drinks/week for women and adults 65+, as at-risk drinking."}},
+    {"@type": "Question", "name": "What blood tests actually check liver health?", "acceptedAnswer": {"@type": "Answer", "text": "The most common are ALT and AST (liver enzymes that rise with cell damage), GGT (rises with liver strain, alcohol use, and bile duct issues), and bilirubin (rises when the liver can't process waste products properly), usually bundled into a standard liver function test panel."}},
+    {"@type": "Question", "name": "Is the Liver Fat Estimate calculator a diagnosis?", "acceptedAnswer": {"@type": "Answer", "text": "No. It is an educational estimate based on a published research formula, not a diagnostic tool. Only a doctor, using proper testing such as blood work or imaging, can diagnose fatty liver disease."}},
+    {"@type": "Question", "name": "Are liver support supplements backed by real evidence?", "acceptedAnswer": {"@type": "Answer", "text": "It varies by ingredient. Some, like vitamin E and omega-3s, have clinical trial evidence in specific contexts, usually under medical supervision. Others, especially some herbal detox products, have weak evidence and have themselves been linked to liver injury in rare cases."}},
+    {"@type": "Question", "name": "Can a medication damage my liver even if taken exactly as prescribed?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, in rare cases, through drug-induced liver injury (DILI), which can happen even at correct doses due to individual sensitivity. This is why doctors periodically order liver bloodwork for certain drugs."}},
+    {"@type": "Question", "name": "When should I see a doctor about my liver?", "acceptedAnswer": {"@type": "Answer", "text": "Any yellowing of skin or eyes, dark urine, abdominal swelling, or unexplained easy bruising warrants prompt medical attention rather than a wait-and-see approach."}}
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet">
 <style>
@@ -135,6 +151,21 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .lh-ex-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
 .lh-ex-card h4{margin:10px 0 6px;font-size:15px}
 .lh-ex-card p{margin:0;font-size:13.5px;color:var(--ink-soft)}
+
+/* stat strip (content-area highlight numbers) */
+.lh-stat-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:18px 0 26px}
+.lh-stat{background:var(--sm);border:1px solid var(--line);border-radius:var(--radius);padding:18px 14px;text-align:center}
+.lh-stat b{display:block;font-size:24px;font-family:'Fraunces',serif;color:var(--tp-dark);line-height:1.2}
+.lh-stat span{font-size:12px;color:var(--ink-soft);display:block;margin-top:6px;line-height:1.4}
+
+/* FAQ accordion */
+.lh-faq{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden;background:var(--card)}
+.lh-faq summary{padding:14px 18px;cursor:pointer;font-weight:600;font-size:14.5px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.lh-faq summary::-webkit-details-marker{display:none}
+.lh-faq summary::after{content:'+';font-size:20px;color:var(--tp);flex:0 0 auto;font-weight:400}
+.lh-faq[open] summary::after{content:'\2013'}
+.lh-faq[open] summary{border-bottom:1px solid var(--line)}
+.lh-faq p{margin:0;padding:14px 18px;font-size:13.5px;color:var(--ink-soft)}
 .lh-disclaimer{background:var(--wn-bg);border:1px solid #F0DDB0;border-radius:12px;padding:14px 16px;font-size:13px;color:#7A5410;margin-top:6px}
 
 /* doctor flow */
@@ -287,6 +318,14 @@ LiverHealthHub
 <button data-tab="research" onclick="navTo('research',this)">Latest Research</button>
 </div>
 </div>
+<div class="nav-group">
+<button onclick="toggleNavGroup(this)">More Topics <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6"/></svg></button>
+<div class="nav-dropdown">
+<button data-tab="alcohol" onclick="navTo('alcohol',this)">Alcohol &amp; the Liver</button>
+<button data-tab="medsafety" onclick="navTo('medsafety',this)">Medication Safety</button>
+<button data-tab="faq" onclick="navTo('faq',this)">FAQ</button>
+</div>
+</div>
 </nav>
 
 <button class="nav-cta" onclick="showSection('doctor', document.querySelector('.brand')); closeAllNavGroups();"><span class="cta-full">When to See a Doctor</span><span class="cta-short">Doctor</span></button>
@@ -404,6 +443,11 @@ LiverHealthHub
 <div id="exercise" class="lh-section" role="tabpanel">
 <h2>Exercise for Liver Health</h2>
 <p class="lh-subnote">Even without weight loss, exercise directly reduces liver fat. Aim for a mix of these three types.</p>
+<div class="lh-stat-strip">
+<div class="lh-stat"><b>150 min</b><span>of moderate activity per week — the widely cited general target</span></div>
+<div class="lh-stat"><b>No weight loss required</b><span>exercise reduces liver fat even before the scale moves</span></div>
+<div class="lh-stat"><b>2–3x / week</b><span>resistance training frequency linked to better insulin sensitivity</span></div>
+</div>
 <div class="lh-exercise-grid">
 <div class="lh-ex-card"><svg width="40" height="40" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="#0F6E5C" stroke-width="1.5" fill="#E7F5EF"/></svg><h4>Aerobic</h4><p>Brisk walking, cycling, or swimming for 30 min, 5 days a week — the most consistently effective type for burning liver fat.</p></div>
 <div class="lh-ex-card"><svg width="40" height="40" viewBox="0 0 48 48" fill="none"><rect x="14" y="14" width="20" height="20" rx="4" stroke="#E3A845" stroke-width="1.5" fill="#FBF1E1"/></svg><h4>Resistance</h4><p>Bodyweight or weights 2–3x weekly. Builds muscle mass, which improves insulin sensitivity and liver metabolism.</p></div>
@@ -441,10 +485,83 @@ LiverHealthHub
 <div class="lh-fact"><h4>✓ Fact: Losing 5–10% of body weight can meaningfully help fatty liver.</h4><p>Research consistently links modest weight loss — just 5–10% of body weight — to reduced liver fat, less inflammation, and even fibrosis improvement in people with MASLD.</p></div>
 </div>
 
+<!-- ALCOHOL -->
+<div id="alcohol" class="lh-section" role="tabpanel">
+<h2>Alcohol &amp; Your Liver</h2>
+<p class="lh-subnote">Your liver processes almost all of the alcohol you drink — which is exactly why heavy or prolonged use affects it more than almost any other organ. Here's how the risk actually builds, and where the commonly cited safety thresholds come from.</p>
+
+<div class="lh-stat-strip">
+<div class="lh-stat"><b>~90%</b><span>of the alcohol you drink is metabolized by the liver</span></div>
+<div class="lh-stat"><b>&gt;60g/day</b><span>daily intake at which fatty liver appears in about 9 in 10 drinkers</span></div>
+<div class="lh-stat"><b>3 stages</b><span>fatty liver → alcoholic hepatitis → cirrhosis</span></div>
+</div>
+
+<div class="lh-flow" style="max-width:100%;margin-bottom:26px">
+<h3 style="margin:0 0 4px;font-size:16px">How Alcohol-Related Liver Damage Progresses</h3>
+<div class="lh-flow-step"><div class="lh-flow-num">1</div><p><strong>Fatty liver (steatosis).</strong> Fat starts accumulating in liver cells. This stage is usually reversible with abstinence and typically causes no symptoms.</p></div>
+<div class="lh-flow-arrow">↓</div>
+<div class="lh-flow-step"><div class="lh-flow-num">2</div><p><strong>Alcoholic hepatitis.</strong> Continued drinking triggers inflammation of liver tissue. Outcomes vary — from recovery with abstinence to progression toward liver failure in severe cases.</p></div>
+<div class="lh-flow-arrow">↓</div>
+<div class="lh-flow-step"><div class="lh-flow-num">3</div><p><strong>Cirrhosis.</strong> Long-term inflammation leads to permanent scarring. At this stage damage is irreversible and can lead to portal hypertension and liver failure.</p></div>
+<div class="lh-flow-result amber" style="margin-top:14px">Clinical references note that daily intake of roughly 30–50g of alcohol (about 2–3.5 standard US drinks) sustained over 5+ years is associated with alcohol-related liver disease, with fatty liver appearing in about 90% of people drinking more than 60g/day.</div>
+</div>
+
+<div class="lh-grid">
+<div class="lh-card"><span class="lh-badge warn">At-Risk</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><path d="M16 12 L20 12 L20 36 Q20 40 24 40 Q28 40 28 36 L28 12 L32 12" stroke="#C6821E" stroke-width="1.5" fill="#FBF1E1"/></svg><h3>Men</h3><p>More than 14 drinks per week, or 4+ in a single sitting, is classed as at-risk drinking under U.S. clinical guidelines (NIAAA).</p></div>
+<div class="lh-card"><span class="lh-badge warn">At-Risk</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><path d="M16 12 L20 12 L20 36 Q20 40 24 40 Q28 40 28 36 L28 12 L32 12" stroke="#C6821E" stroke-width="1.5" fill="#FBF1E1"/></svg><h3>Women &amp; Adults 65+</h3><p>More than 7 drinks per week, or 3+ in a single sitting, is classed as at-risk drinking under the same guidelines.</p></div>
+<div class="lh-card"><span class="lh-badge risk">Higher Risk</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="#C64B3C" stroke-width="1.5" fill="#FBEAE7"/></svg><h3>Alcohol + Metabolic Risk</h3><p>Alcohol use combined with obesity, type 2 diabetes, or existing MASLD compounds liver risk more than either factor alone.</p></div>
+<div class="lh-card"><span class="lh-badge safe">Reversible Early</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><path d="M18 24 L22 30 L30 18" stroke="#1E8E5A" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="24" cy="24" r="16" stroke="#1E8E5A" stroke-width="1.5" fill="#E7F5EE"/></svg><h3>The Early Stage Is Reversible</h3><p>Fatty liver caused by alcohol typically improves within weeks of stopping or significantly cutting back — before scarring sets in.</p></div>
+</div>
+
+<div class="lh-disclaimer"><strong>Not a screening tool.</strong> These numbers describe population-level research thresholds, not a personal safety guarantee — liver sensitivity to alcohol varies by genetics, body weight, sex, and existing health conditions. If you're concerned about your own drinking or your liver, talk to a doctor — it's a practical, judgment-free conversation, and support is available if you want to cut back.</div>
+</div>
+
+<!-- MEDSAFETY -->
+<div id="medsafety" class="lh-section" role="tabpanel">
+<h2>Medications &amp; Supplements: What Can Strain Your Liver</h2>
+<p class="lh-subnote">This is different from the Supplements page — this is general awareness of substances linked to liver strain, not a shopping guide. Never stop or change a prescribed medication based on this page; talk to your prescribing doctor first.</p>
+
+<div class="lh-grid">
+<div class="lh-card"><span class="lh-badge risk">High Risk (Overdose)</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><rect x="16" y="8" width="16" height="24" rx="4" stroke="#C64B3C" stroke-width="1.5" fill="#FBEAE7"/><circle cx="24" cy="40" r="3" stroke="#C64B3C" stroke-width="1.2" fill="none"/></svg><h3>Acetaminophen / Paracetamol</h3><p>Safe at recommended doses, but the single most common cause of acute liver failure when taken in excess — risk rises further when combined with alcohol.</p></div>
+<div class="lh-card"><span class="lh-badge warn">Use With Care</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><rect x="14" y="14" width="20" height="20" rx="10" stroke="#C6821E" stroke-width="1.5" fill="#FBF1E1"/></svg><h3>NSAIDs</h3><p>Ibuprofen, naproxen, and diclofenac at high doses or with long-term use — especially combined with alcohol — carry added liver risk.</p></div>
+<div class="lh-card"><span class="lh-badge warn">Monitored</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><path d="M14 34 Q14 18 24 14 Q34 18 34 34 Q34 40 24 42 Q14 40 14 34Z" stroke="#C6821E" stroke-width="1.5" fill="#FBF1E1"/></svg><h3>Certain Antibiotics</h3><p>Amoxicillin-clavulanate (Augmentin) is a leading antibiotic cause of drug-induced liver injury, usually from an immune-type reaction.</p></div>
+<div class="lh-card"><span class="lh-badge warn">Monitored</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="#C6821E" stroke-width="1.5" fill="#FBF1E1"/><path d="M24 16 L24 24 L30 28" stroke="#C6821E" stroke-width="1.5" stroke-linecap="round"/></svg><h3>Antiseizure Medications</h3><p>Phenytoin and carbamazepine can occasionally trigger immune-related liver inflammation, more often early in treatment.</p></div>
+<div class="lh-card"><span class="lh-badge warn">Monitored</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><rect x="16" y="10" width="16" height="28" rx="6" stroke="#C6821E" stroke-width="1.5" fill="#FBF1E1"/></svg><h3>Methotrexate</h3><p>Used for autoimmune conditions and some cancers — long-term use, especially with alcohol, is linked to liver inflammation and scarring, so routine monitoring is standard practice.</p></div>
+<div class="lh-card"><span class="lh-badge warn">Monitored</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="24" rx="14" ry="18" stroke="#C6821E" stroke-width="1.5" fill="#FBF1E1"/></svg><h3>Antifungal Medications</h3><p>Fluconazole, itraconazole, and ketoconazole can affect the liver with extended use, ranging from mild enzyme changes to rarer, more serious injury.</p></div>
+<div class="lh-card"><span class="lh-badge risk">Higher Risk</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><path d="M18 20 Q24 14 30 20 Q32 26 24 34 Q16 26 18 20Z" stroke="#C64B3C" stroke-width="1.5" fill="#FBEAE7"/></svg><h3>Herbal &amp; "Natural" Supplements</h3><p>Kava, black cohosh, comfrey, and high-dose green tea extract are among the herbal products most consistently linked to liver injury — "natural" doesn't mean the risk is zero.</p></div>
+<div class="lh-card"><span class="lh-badge safe">Usually Safe</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><path d="M18 24 L22 30 L30 18" stroke="#1E8E5A" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="24" cy="24" r="16" stroke="#1E8E5A" stroke-width="1.5" fill="#E7F5EE"/></svg><h3>Statins</h3><p>Widely and safely used long-term. They can cause a temporary rise in liver enzymes, which typically normalizes — routine bloodwork is precautionary, not usually a cause for alarm.</p></div>
+</div>
+
+<div class="lh-disclaimer" style="margin-top:4px"><strong>What to actually do with this:</strong> if you take any regular medication, ask your doctor or pharmacist whether it's one that benefits from periodic liver-function bloodwork (ALT, AST, GGT) — most drug-related liver injury is caught early exactly that way, long before symptoms appear. Never stop a prescribed medication on your own based on this page.</div>
+</div>
+
+<!-- FAQ -->
+<div id="faq" class="lh-section" role="tabpanel">
+<h2>Frequently Asked Questions</h2>
+<p class="lh-subnote">Quick answers to the questions we hear most. Tap a question to expand it.</p>
+
+<details class="lh-faq"><summary>What's the difference between fatty liver, MASLD, and MASH?</summary><p>"Fatty liver" describes fat build-up in the liver. MASLD (metabolic dysfunction-associated steatotic liver disease) is the current clinical term for fatty liver linked to metabolic risk factors like obesity, type 2 diabetes, or high cholesterol. MASH (metabolic dysfunction-associated steatohepatitis) is the more advanced, inflamed form of MASLD that carries a higher risk of progressing to fibrosis or cirrhosis.</p></details>
+<details class="lh-faq"><summary>Can fatty liver actually be reversed?</summary><p>In its early stages, yes — often within weeks to months. Weight loss of just 5–10% of body weight, reduced alcohol and added sugar intake, and regular exercise are all linked to measurable reductions in liver fat. Once significant scarring (fibrosis or cirrhosis) has developed, damage is generally no longer reversible, which is why early action matters.</p></details>
+<details class="lh-faq"><summary>How much alcohol is actually "safe" for my liver?</summary><p>There's no universally safe amount — risk is a spectrum, not a cliff edge. U.S. clinical guidelines describe more than 14 drinks/week (men) or 7 drinks/week (women and adults 65+) as at-risk drinking. See the Alcohol &amp; the Liver page for the full breakdown.</p></details>
+<details class="lh-faq"><summary>What blood tests actually check liver health?</summary><p>The most common are ALT and AST (liver enzymes that rise with cell damage), GGT (rises with liver strain, alcohol use, and bile duct issues), and bilirubin (rises when the liver can't process waste products properly). These are usually bundled into a standard "liver function test" (LFT) panel your doctor can order.</p></details>
+<details class="lh-faq"><summary>Is the Liver Fat Estimate calculator on this site a diagnosis?</summary><p>No. It's an educational estimate based on a published research formula, not a diagnostic tool. It cannot tell you whether you have fatty liver disease — only a doctor, using proper testing such as blood work or imaging, can do that. See the Risk Calculator page for the full disclaimer.</p></details>
+<details class="lh-faq"><summary>Are liver support supplements backed by real evidence?</summary><p>It varies a lot by ingredient. Some, like vitamin E and omega-3s, have real clinical trial evidence in specific contexts, usually under medical supervision. Others, especially some herbal "detox" products, have weak evidence and in rare cases have themselves been linked to liver injury. See the Supplements and Medication Safety pages for specifics.</p></details>
+<details class="lh-faq"><summary>Can a medication damage my liver even if I'm taking it exactly as prescribed?</summary><p>Yes, in rare cases — this is called drug-induced liver injury (DILI), and it can happen even at correct doses due to individual sensitivity. It's uncommon, which is why it's not a reason to stop necessary medication on your own, but it's also why doctors periodically order liver bloodwork for certain drugs.</p></details>
+<details class="lh-faq"><summary>When should I actually see a doctor about my liver?</summary><p>See the When to See a Doctor page for a full decision guide — but as a rule, any yellowing of skin or eyes, dark urine, abdominal swelling, or unexplained easy bruising warrants prompt medical attention, not a wait-and-see approach.</p></details>
+
+<div class="lh-disclaimer" style="margin-top:16px">These answers are simplified for general education and aren't a substitute for personalized medical advice. If something here concerns you, bring it to a doctor.</div>
+</div>
+
 <!-- RESEARCH -->
 <div id="research" class="lh-section" role="tabpanel">
 <h2>Latest Research</h2>
 <p class="lh-subnote">A snapshot of recent, peer-reviewed developments in liver science. This is a research summary for awareness only, not a treatment recommendation — talk to your doctor about what applies to you.</p>
+
+<div class="lh-research-card">
+<div class="lh-research-meta">Kyung Hee University · The Lancet Gastroenterology &amp; Hepatology · May 2026</div>
+<h4>Global MASLD cases projected to reach 1.8 billion by 2050</h4>
+<p>A global burden analysis found MASLD cases surged 142.7% between 1990 and 2023 — reaching an estimated 1.3 billion people, or roughly 1 in 6 adults worldwide — and are projected to climb to 1.8 billion by 2050 if current trends continue. Most of the projected growth comes from early-stage disease driven by rising rates of obesity, high blood sugar, and smoking, reinforcing prevention as the highest-leverage response.</p>
+</div>
 
 <div class="lh-research-card">
 <div class="lh-research-meta">Terminology · 2023–2026</div>
