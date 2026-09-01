@@ -60,7 +60,6 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .top-bar{display:flex;justify-content:flex-end;padding:14px 20px 0;max-width:980px;margin:0 auto}
 .top-btn{display:flex;align-items:center;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font-size:13px;color:var(--ink-soft);cursor:pointer}
 .top-btn:hover{border-color:var(--tp);color:var(--tp)}
-
 /* MODERN STICKY HEADER */
 .site-header{position:sticky;top:0;z-index:50;background:rgba(250,248,243,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .site-header-inner{position:relative;max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:16px}
@@ -69,7 +68,8 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .nav-groups{display:flex;align-items:center;gap:2px;flex:1;justify-content:center}
 .nav-group{position:relative}
 .nav-group>button{background:none;border:none;font-family:inherit;font-size:13.5px;font-weight:500;color:var(--ink);padding:9px 12px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:5px}
-.nav-group>button:hover,.nav-group.open>button{background:var(--sm);color:var(--tp-dark)}
+.nav-group>button:hover,.nav-group.open>button,.nav-group>button.current{background:var(--sm);color:var(--tp-dark)}
+.nav-group>button.current{font-weight:600}
 .nav-group>button svg{width:11px;height:11px;transition:transform .15s}
 .nav-group.open>button svg{transform:rotate(180deg)}
 .nav-dropdown{display:none;position:absolute;top:calc(100% + 6px);left:0;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 28px rgba(20,40,35,0.12);padding:6px;min-width:190px}
@@ -96,7 +96,6 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
   .nav-cta .cta-full{display:none}
   .nav-cta .cta-short{display:inline}
 }
-
 /* HERO */
 .lh-hero{position:relative;overflow:hidden;border-radius:24px;margin-top:18px;padding:52px 40px 44px;text-align:center;background:
   radial-gradient(circle at 15% 20%, rgba(240,128,95,0.16), transparent 45%),
@@ -113,19 +112,16 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .lh-hstat{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.22);border-radius:12px;padding:10px 18px;min-width:120px}
 .lh-hstat b{display:block;font-size:20px;font-family:'Fraunces',serif}
 .lh-hstat span{font-size:11.5px;color:rgba(255,255,255,0.8)}
-
 /* TABS */
 .lh-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:26px 0 20px;padding:6px;background:var(--card);border:1px solid var(--line);border-radius:14px;position:sticky;top:10px;z-index:10}
 .lh-tab{border:none;background:transparent;padding:9px 14px;border-radius:9px;font-size:13.5px;font-weight:500;color:var(--ink-soft);cursor:pointer;white-space:nowrap}
 .lh-tab:hover{background:var(--sm);color:var(--tp-dark)}
 .lh-tab.active{background:var(--tp);color:#fff}
-
 .lh-section{display:none;animation:fade .25s ease}
 .lh-section.active{display:block}
 @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
 .lh-section > h2{font-size:24px;margin-bottom:6px}
 .lh-subnote{color:var(--ink-soft);margin-bottom:18px;font-size:14px;max-width:640px}
-
 .lh-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
 .lh-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;position:relative}
 .lh-card h3{font-size:16px;margin:10px 0 6px}
@@ -135,7 +131,6 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .lh-badge.risk{background:var(--dg-bg);color:var(--dg)}
 .lh-badge.warn{background:var(--wn-bg);color:var(--wn)}
 .lh-badge.safe{background:var(--ps-bg);color:var(--ps)}
-
 /* colorful photo strip */
 .lh-photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0 26px;border-radius:var(--radius);overflow:hidden}
 .lh-real-banner{width:100%;height:280px;object-fit:cover;object-position:center 20%;border-radius:var(--radius);margin:20px 0;display:block}
@@ -151,18 +146,15 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .p1{background:linear-gradient(135deg,#59B98A,#0F6E5C)}
 .p2{background:linear-gradient(135deg,#F0805F,#C64B3C)}
 .p3{background:linear-gradient(135deg,#E3A845,#B9791A)}
-
 .lh-exercise-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:16px}
 .lh-ex-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px}
 .lh-ex-card h4{margin:10px 0 6px;font-size:15px}
 .lh-ex-card p{margin:0;font-size:13.5px;color:var(--ink-soft)}
-
 /* stat strip (content-area highlight numbers) */
 .lh-stat-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:18px 0 26px}
 .lh-stat{background:var(--sm);border:1px solid var(--line);border-radius:var(--radius);padding:18px 14px;text-align:center}
 .lh-stat b{display:block;font-size:24px;font-family:'Fraunces',serif;color:var(--tp-dark);line-height:1.2}
 .lh-stat span{font-size:12px;color:var(--ink-soft);display:block;margin-top:6px;line-height:1.4}
-
 /* FAQ accordion */
 .lh-faq{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;overflow:hidden;background:var(--card)}
 .lh-faq summary{padding:14px 18px;cursor:pointer;font-weight:600;font-size:14.5px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
@@ -172,7 +164,6 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .lh-faq[open] summary{border-bottom:1px solid var(--line)}
 .lh-faq p{margin:0;padding:14px 18px;font-size:13.5px;color:var(--ink-soft)}
 .lh-disclaimer{background:var(--wn-bg);border:1px solid #F0DDB0;border-radius:12px;padding:14px 16px;font-size:13px;color:#7A5410;margin-top:6px}
-
 /* doctor flow */
 .lh-flow{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;max-width:640px}
 .lh-flow-step{display:flex;gap:12px;align-items:flex-start;margin-bottom:6px}
@@ -183,7 +174,6 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .lh-flow-result.green{background:var(--ps-bg);color:#1B5E3B}
 .lh-flow-result.amber{background:var(--wn-bg);color:#7A5410}
 .lh-flow-result.red{background:var(--dg-bg);color:#8A2E22}
-
 /* myths */
 .lh-myth,.lh-fact{border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;border:1px solid var(--line)}
 .lh-myth{background:var(--dg-bg);border-color:#F0CFC8}
@@ -192,7 +182,6 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .lh-myth h4{color:#8A2E22}
 .lh-fact h4{color:#1B5E3B}
 .lh-myth p,.lh-fact p{margin:0;font-size:13.5px;color:var(--ink)}
-
 /* research */
 .lh-research-card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--tp);border-radius:10px;padding:16px 18px;margin-bottom:12px}
 .lh-research-card h4{font-size:15px;margin:0 0 4px;font-family:'Inter',sans-serif}
@@ -200,7 +189,6 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .lh-research-card p{margin:0;font-size:13.5px;color:var(--ink-soft)}
 .lh-research-card a{color:var(--tp);text-decoration:none;font-size:12.5px;font-weight:600}
 .lh-research-card a:hover{text-decoration:underline}
-
 /* supplements / monetisation */
 .lh-affiliate{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;margin-bottom:14px;display:flex;flex-direction:column;gap:8px}
 .lh-affiliate-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
@@ -223,7 +211,6 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .lh-region-btn.active{background:var(--tp);border-color:var(--tp);color:#fff}
 .lh-region-note{margin:0 0 6px;font-size:12px;color:var(--ink-soft)}
 .lh-region-empty{background:var(--sm);border-radius:10px;padding:14px 16px;font-size:13.5px;color:var(--ink-soft);margin-bottom:14px}
-
 /* calculator */
 .calc-form{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;max-width:560px}
 .calc-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
@@ -232,7 +219,6 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .calc-result{display:none;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
 .calc-result.show{display:block}
 .calc-bmi{font-size:13px;color:var(--ink-soft);margin-bottom:6px}
-
 /* fatty liver index calculator */
 .fli-widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);max-width:640px;overflow:hidden;margin-top:28px}
 .fli-widget-header{padding:22px 24px 18px;border-bottom:1px solid var(--line)}
@@ -264,7 +250,6 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .fli-explain.low{background:var(--ps-bg)}
 .fli-explain.mid{background:var(--wn-bg)}
 .fli-explain.high{background:var(--dg-bg)}
-
 /* checklist */
 .lh-checklist{list-style:none;padding:0;margin:0 0 18px;display:flex;flex-direction:column;gap:8px}
 .lh-check-item{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer}
@@ -278,23 +263,20 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .lh-score{text-align:center;margin-bottom:16px}
 .lh-score-num{font-family:'Fraunces',serif;font-size:32px;color:var(--tp-dark)}
 .lh-score-label{font-size:13px;color:var(--ink-soft)}
-
 .footer{text-align:center;color:var(--ink-soft);font-size:12px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line);line-height:1.7}
 @media(max-width:640px){.lh-hero{padding:36px 20px}.lh-hero h1{font-size:28px}.calc-row{grid-template-columns:1fr}.fli-form{grid-template-columns:1fr}.fli-unit-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-
 <header class="site-header">
 <div class="site-header-inner" id="headerInner">
 <a class="brand" href="javascript:void(0)" onclick="navTo('about', document.querySelector('.nav-dropdown button'))">
 <span class="brand-mark"><svg width="16" height="16" viewBox="0 0 48 48" fill="none"><path d="M16 24 Q20 16 24 20 Q28 16 32 24 Q34 30 30 34 Q24 38 24 36 Q24 38 18 34 Q14 30 16 24Z" fill="#fff"/></svg></span>
 LiverHealthHub
 </a>
-
 <nav class="nav-groups" aria-label="Primary">
 <div class="nav-group">
-<button onclick="toggleNavGroup(this)">Learn <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6"/></svg></button>
+<button class="current" onclick="toggleNavGroup(this)">Learn <svg viewBox="0 0 12 8" fill="none"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.6"/></svg></button>
 <div class="nav-dropdown">
 <button class="active" data-tab="about" onclick="navTo('about',this)">About the Liver</button>
 <button data-tab="risks" onclick="navTo('risks',this)">Risk Factors</button>
@@ -332,20 +314,16 @@ LiverHealthHub
 </div>
 </div>
 </nav>
-
 <button class="nav-cta" onclick="showSection('doctor', document.querySelector('.brand')); closeAllNavGroups();"><span class="cta-full">When to See a Doctor</span><span class="cta-short">Doctor</span></button>
 <button class="nav-burger" aria-label="Menu" onclick="document.getElementById('headerInner').classList.toggle('mobile-open')">
 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
 </button>
 </div>
 </header>
-
 <div class="top-bar">
 <button class="top-btn" onclick="window.print()">🖨 Print / Save as PDF</button>
 </div>
-
 <div class="container">
-
 <div class="lh-hero">
 <div class="lh-hero-visual">
 <svg width="64" height="64" viewBox="0 0 80 80" fill="none"><path d="M28 38 Q32 26 40 30 Q48 26 52 38 Q56 46 50 54 Q44 60 40 57 Q36 60 30 54 Q24 46 28 38Z" fill="rgba(255,255,255,0.15)" stroke="#fff" stroke-width="1.6"/><path d="M32 42 Q36 37 40 42 Q44 37 48 42" stroke="#F0805F" stroke-width="1.4" fill="none"/></svg>
@@ -360,9 +338,7 @@ LiverHealthHub
 <div class="lh-hstat"><b>500+</b><span>functions your liver performs daily</span></div>
 </div>
 </div>
-
 <img class="lh-real-banner" src="liverherobanner.jpg" alt="Illustration of the liver's location in the body, surrounded by liver-friendly foods like leafy greens, tomatoes, avocado, and olive oil">
-
 <!-- ABOUT -->
 <div id="about" class="lh-section active" role="tabpanel">
 <h2>What Your Liver Does</h2>
@@ -375,10 +351,8 @@ LiverHealthHub
 <div class="lh-card"><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><path d="M10 30 Q10 14 24 14 Q38 14 38 30 Q38 38 24 40 Q10 38 10 30Z" stroke="#E3A845" stroke-width="1.5" fill="#FBF1E1"/><path d="M16 26 Q24 18 32 26" stroke="#E3A845" stroke-width="1.2" fill="none"/></svg><h3>Regulates Cholesterol</h3><p>Creates cholesterol and carrier proteins, balancing HDL and LDL levels in your body.</p></div>
 <div class="lh-card"><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><rect x="16" y="8" width="16" height="24" rx="4" stroke="#F0805F" stroke-width="1.5" fill="#FBEAE7"/><circle cx="24" cy="40" r="3" stroke="#F0805F" stroke-width="1.2" fill="none"/></svg><h3>Processes Medications</h3><p>Metabolizes most drugs you take — a big reason liver health affects how medicines work in your body.</p></div>
 </div>
-
 <img class="lh-real-compare" src="fattyvshealthyliver.jpg" alt="Comparison of a fatty liver versus a healthy liver, alongside liver-friendly foods">
 </div>
-
 <!-- RISKS -->
 <div id="risks" class="lh-section" role="tabpanel">
 <h2>Risk Factors</h2>
@@ -393,7 +367,6 @@ LiverHealthHub
 <div class="lh-card"><span class="lh-badge safe">Protective</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="#1E8E5A" stroke-width="1.5" fill="#E7F5EE"/><path d="M18 24 L22 30 L30 18" stroke="#1E8E5A" stroke-width="2" stroke-linecap="round" fill="none"/></svg><h3>Regular Exercise</h3><p>150 minutes of moderate exercise weekly is linked to notably lower fatty-liver risk. Movement is medicine.</p></div>
 </div>
 </div>
-
 <!-- SYMPTOMS -->
 <div id="symptoms" class="lh-section" role="tabpanel">
 <h2>Warning Signs</h2>
@@ -407,12 +380,10 @@ LiverHealthHub
 <div class="lh-card"><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><circle cx="18" cy="24" r="8" stroke="#0F6E5C" stroke-width="1.5" fill="#E7F5EF"/><circle cx="30" cy="24" r="8" stroke="#0F6E5C" stroke-width="1.5" fill="#E7F5EF"/></svg><h3>Easy Bruising</h3><p>The liver produces clotting factors — when damaged, you may bruise easily or bleed longer from cuts.</p></div>
 </div>
 </div>
-
 <!-- DIET -->
 <div id="diet" class="lh-section" role="tabpanel">
 <h2>Liver-Friendly Diet</h2>
 <p class="lh-subnote">Food is one of the most powerful levers for liver health, especially for MASLD (fatty liver).</p>
-
 <div class="lh-flow" style="max-width:100%;margin-bottom:28px">
 <h3 style="margin:0 0 4px;font-size:16px">Stress, Cortisol &amp; Carbohydrate Metabolism</h3>
 <p class="lh-subnote" style="margin-bottom:16px">Diet isn't only about what's on your plate — how your body handles stress changes how it processes the carbohydrates you eat, too. Here's the chain of events, in plain terms.</p>
@@ -427,7 +398,6 @@ LiverHealthHub
 <div class="lh-flow-step"><div class="lh-flow-num">5</div><p><strong>The liver converts the excess into fat.</strong> Facing more sugar and insulin than it can use, the liver ramps up de novo lipogenesis (turning excess carbohydrate into fat), takes in more fat released from other tissues, and burns less fat for fuel — a combination that drives fat build-up inside the liver itself.</p></div>
 <div class="lh-flow-result amber" style="margin-top:14px">This is one reason researchers now study chronic, unmanaged stress as a contributing factor in MASLD (fatty liver), alongside diet, alcohol, and activity level. Managing stress — sleep, movement, and relaxation practices — is a liver-health lever too, not just what's on your plate.</div>
 </div>
-
 <div class="lh-grid">
 <div class="lh-card"><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="14" stroke="#1E8E5A" stroke-width="1.5" fill="#E7F5EE"/></svg><h3>Leafy Greens</h3><p>Spinach, kale, and arugula are rich in glutathione — an antioxidant that supports the liver's detox pathways.</p></div>
 <div class="lh-card"><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="28" rx="10" ry="12" stroke="#1E8E5A" stroke-width="1.5" fill="#E7F5EE"/></svg><h3>Cruciferous Vegetables</h3><p>Broccoli, cauliflower, and Brussels sprouts support the liver's natural detox enzyme activity.</p></div>
@@ -442,7 +412,6 @@ LiverHealthHub
 <div class="lh-photo p2"><div class="lh-photo-illus"><svg viewBox="0 0 120 80" fill="none"><path d="M18 40 Q35 14 70 22 Q95 28 108 40 Q95 52 70 58 Q35 66 18 40Z" fill="rgba(255,255,255,0.18)" stroke="#fff" stroke-width="2"/><path d="M14 40 L2 26 L2 54 Z" fill="rgba(255,255,255,0.18)" stroke="#fff" stroke-width="2" stroke-linejoin="round"/><circle cx="80" cy="34" r="3" fill="#fff"/><path d="M48 28 Q52 40 48 52 M64 25 Q68 40 64 55" stroke="#fff" stroke-width="1.6" fill="none"/></svg></div><span>Omega-3-rich fish, twice a week</span></div>
 </div>
 </div>
-
 <!-- EXERCISE -->
 <div id="exercise" class="lh-section" role="tabpanel">
 <h2>Exercise for Liver Health</h2>
@@ -459,7 +428,6 @@ LiverHealthHub
 </div>
 <div class="lh-disclaimer">Start with what you can manage. A 10-minute walk after meals beats nothing. Consistency beats intensity — and check with your doctor before starting a new routine if you have an existing health condition.</div>
 </div>
-
 <!-- DOCTOR -->
 <div id="doctor" class="lh-section" role="tabpanel">
 <h2>When to See a Doctor</h2>
@@ -476,7 +444,6 @@ LiverHealthHub
 <div class="lh-flow-result red">If YES to question 1: see a doctor within 48–72 hours. Do not wait.</div>
 </div>
 </div>
-
 <!-- MYTHS -->
 <div id="myths" class="lh-section" role="tabpanel">
 <h2>Myths vs. Facts</h2>
@@ -488,18 +455,15 @@ LiverHealthHub
 <div class="lh-myth"><h4>✕ Myth: "Natural supplements are always safe for the liver."</h4><p>Herbal products like kava, comfrey, and high-dose green tea extract have been associated with liver injury. "Natural" doesn't automatically mean "safe," especially at high doses or combined with medication.</p></div>
 <div class="lh-fact"><h4>✓ Fact: Losing 5–10% of body weight can meaningfully help fatty liver.</h4><p>Research consistently links modest weight loss — just 5–10% of body weight — to reduced liver fat, less inflammation, and even fibrosis improvement in people with MASLD.</p></div>
 </div>
-
 <!-- ALCOHOL -->
 <div id="alcohol" class="lh-section" role="tabpanel">
 <h2>Alcohol &amp; Your Liver</h2>
 <p class="lh-subnote">Your liver processes almost all of the alcohol you drink — which is exactly why heavy or prolonged use affects it more than almost any other organ. Here's how the risk actually builds, and where the commonly cited safety thresholds come from.</p>
-
 <div class="lh-stat-strip">
 <div class="lh-stat"><b>~90%</b><span>of the alcohol you drink is metabolized by the liver</span></div>
 <div class="lh-stat"><b>&gt;60g/day</b><span>daily intake at which fatty liver appears in about 9 in 10 drinkers</span></div>
 <div class="lh-stat"><b>3 stages</b><span>fatty liver → alcoholic hepatitis → cirrhosis</span></div>
 </div>
-
 <div class="lh-flow" style="max-width:100%;margin-bottom:26px">
 <h3 style="margin:0 0 4px;font-size:16px">How Alcohol-Related Liver Damage Progresses</h3>
 <div class="lh-flow-step"><div class="lh-flow-num">1</div><p><strong>Fatty liver (steatosis).</strong> Fat starts accumulating in liver cells. This stage is usually reversible with abstinence and typically causes no symptoms.</p></div>
@@ -509,22 +473,18 @@ LiverHealthHub
 <div class="lh-flow-step"><div class="lh-flow-num">3</div><p><strong>Cirrhosis.</strong> Long-term inflammation leads to permanent scarring. At this stage damage is irreversible and can lead to portal hypertension and liver failure.</p></div>
 <div class="lh-flow-result amber" style="margin-top:14px">Clinical references note that daily intake of roughly 30–50g of alcohol (about 2–3.5 standard US drinks) sustained over 5+ years is associated with alcohol-related liver disease, with fatty liver appearing in about 90% of people drinking more than 60g/day.</div>
 </div>
-
 <div class="lh-grid">
 <div class="lh-card"><span class="lh-badge warn">At-Risk</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><path d="M16 12 L20 12 L20 36 Q20 40 24 40 Q28 40 28 36 L28 12 L32 12" stroke="#C6821E" stroke-width="1.5" fill="#FBF1E1"/></svg><h3>Men</h3><p>More than 14 drinks per week, or 4+ in a single sitting, is classed as at-risk drinking under U.S. clinical guidelines (NIAAA).</p></div>
 <div class="lh-card"><span class="lh-badge warn">At-Risk</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><path d="M16 12 L20 12 L20 36 Q20 40 24 40 Q28 40 28 36 L28 12 L32 12" stroke="#C6821E" stroke-width="1.5" fill="#FBF1E1"/></svg><h3>Women &amp; Adults 65+</h3><p>More than 7 drinks per week, or 3+ in a single sitting, is classed as at-risk drinking under the same guidelines.</p></div>
 <div class="lh-card"><span class="lh-badge risk">Higher Risk</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="#C64B3C" stroke-width="1.5" fill="#FBEAE7"/></svg><h3>Alcohol + Metabolic Risk</h3><p>Alcohol use combined with obesity, type 2 diabetes, or existing MASLD compounds liver risk more than either factor alone.</p></div>
 <div class="lh-card"><span class="lh-badge safe">Reversible Early</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><path d="M18 24 L22 30 L30 18" stroke="#1E8E5A" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="24" cy="24" r="16" stroke="#1E8E5A" stroke-width="1.5" fill="#E7F5EE"/></svg><h3>The Early Stage Is Reversible</h3><p>Fatty liver caused by alcohol typically improves within weeks of stopping or significantly cutting back — before scarring sets in.</p></div>
 </div>
-
 <div class="lh-disclaimer"><strong>Not a screening tool.</strong> These numbers describe population-level research thresholds, not a personal safety guarantee — liver sensitivity to alcohol varies by genetics, body weight, sex, and existing health conditions. If you're concerned about your own drinking or your liver, talk to a doctor — it's a practical, judgment-free conversation, and support is available if you want to cut back.</div>
 </div>
-
 <!-- MEDSAFETY -->
 <div id="medsafety" class="lh-section" role="tabpanel">
 <h2>Medications &amp; Supplements: What Can Strain Your Liver</h2>
 <p class="lh-subnote">This is different from the Supplements page — this is general awareness of substances linked to liver strain, not a shopping guide. Never stop or change a prescribed medication based on this page; talk to your prescribing doctor first.</p>
-
 <div class="lh-grid">
 <div class="lh-card"><span class="lh-badge risk">High Risk (Overdose)</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><rect x="16" y="8" width="16" height="24" rx="4" stroke="#C64B3C" stroke-width="1.5" fill="#FBEAE7"/><circle cx="24" cy="40" r="3" stroke="#C64B3C" stroke-width="1.2" fill="none"/></svg><h3>Acetaminophen / Paracetamol</h3><p>Safe at recommended doses, but the single most common cause of acute liver failure when taken in excess — risk rises further when combined with alcohol.</p></div>
 <div class="lh-card"><span class="lh-badge warn">Use With Care</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><rect x="14" y="14" width="20" height="20" rx="10" stroke="#C6821E" stroke-width="1.5" fill="#FBF1E1"/></svg><h3>NSAIDs</h3><p>Ibuprofen, naproxen, and diclofenac at high doses or with long-term use — especially combined with alcohol — carry added liver risk.</p></div>
@@ -535,15 +495,12 @@ LiverHealthHub
 <div class="lh-card"><span class="lh-badge risk">Higher Risk</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><path d="M18 20 Q24 14 30 20 Q32 26 24 34 Q16 26 18 20Z" stroke="#C64B3C" stroke-width="1.5" fill="#FBEAE7"/></svg><h3>Herbal &amp; "Natural" Supplements</h3><p>Kava, black cohosh, comfrey, and high-dose green tea extract are among the herbal products most consistently linked to liver injury — "natural" doesn't mean the risk is zero.</p></div>
 <div class="lh-card"><span class="lh-badge safe">Usually Safe</span><svg class="lh-card-icon" viewBox="0 0 48 48" fill="none"><path d="M18 24 L22 30 L30 18" stroke="#1E8E5A" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="24" cy="24" r="16" stroke="#1E8E5A" stroke-width="1.5" fill="#E7F5EE"/></svg><h3>Statins</h3><p>Widely and safely used long-term. They can cause a temporary rise in liver enzymes, which typically normalizes — routine bloodwork is precautionary, not usually a cause for alarm.</p></div>
 </div>
-
 <div class="lh-disclaimer" style="margin-top:4px"><strong>What to actually do with this:</strong> if you take any regular medication, ask your doctor or pharmacist whether it's one that benefits from periodic liver-function bloodwork (ALT, AST, GGT) — most drug-related liver injury is caught early exactly that way, long before symptoms appear. Never stop a prescribed medication on your own based on this page.</div>
 </div>
-
 <!-- FAQ -->
 <div id="faq" class="lh-section" role="tabpanel">
 <h2>Frequently Asked Questions</h2>
 <p class="lh-subnote">Quick answers to the questions we hear most. Tap a question to expand it.</p>
-
 <details class="lh-faq"><summary>What's the difference between fatty liver, MASLD, and MASH?</summary><p>"Fatty liver" describes fat build-up in the liver. MASLD (metabolic dysfunction-associated steatotic liver disease) is the current clinical term for fatty liver linked to metabolic risk factors like obesity, type 2 diabetes, or high cholesterol. MASH (metabolic dysfunction-associated steatohepatitis) is the more advanced, inflamed form of MASLD that carries a higher risk of progressing to fibrosis or cirrhosis.</p></details>
 <details class="lh-faq"><summary>Can fatty liver actually be reversed?</summary><p>In its early stages, yes — often within weeks to months. Weight loss of just 5–10% of body weight, reduced alcohol and added sugar intake, and regular exercise are all linked to measurable reductions in liver fat. Once significant scarring (fibrosis or cirrhosis) has developed, damage is generally no longer reversible, which is why early action matters.</p></details>
 <details class="lh-faq"><summary>How much alcohol is actually "safe" for my liver?</summary><p>There's no universally safe amount — risk is a spectrum, not a cliff edge. U.S. clinical guidelines describe more than 14 drinks/week (men) or 7 drinks/week (women and adults 65+) as at-risk drinking. See the Alcohol &amp; the Liver page for the full breakdown.</p></details>
@@ -552,60 +509,49 @@ LiverHealthHub
 <details class="lh-faq"><summary>Are liver support supplements backed by real evidence?</summary><p>It varies a lot by ingredient. Some, like vitamin E and omega-3s, have real clinical trial evidence in specific contexts, usually under medical supervision. Others, especially some herbal "detox" products, have weak evidence and in rare cases have themselves been linked to liver injury. See the Supplements and Medication Safety pages for specifics.</p></details>
 <details class="lh-faq"><summary>Can a medication damage my liver even if I'm taking it exactly as prescribed?</summary><p>Yes, in rare cases — this is called drug-induced liver injury (DILI), and it can happen even at correct doses due to individual sensitivity. It's uncommon, which is why it's not a reason to stop necessary medication on your own, but it's also why doctors periodically order liver bloodwork for certain drugs.</p></details>
 <details class="lh-faq"><summary>When should I actually see a doctor about my liver?</summary><p>See the When to See a Doctor page for a full decision guide — but as a rule, any yellowing of skin or eyes, dark urine, abdominal swelling, or unexplained easy bruising warrants prompt medical attention, not a wait-and-see approach.</p></details>
-
 <div class="lh-disclaimer" style="margin-top:16px">These answers are simplified for general education and aren't a substitute for personalized medical advice. If something here concerns you, bring it to a doctor.</div>
 </div>
-
 <!-- RESEARCH -->
 <div id="research" class="lh-section" role="tabpanel">
 <h2>Latest Research</h2>
 <p class="lh-subnote">A snapshot of recent, peer-reviewed developments in liver science. This is a research summary for awareness only, not a treatment recommendation — talk to your doctor about what applies to you.</p>
-
 <div class="lh-research-card">
 <div class="lh-research-meta">Kyung Hee University · The Lancet Gastroenterology &amp; Hepatology · May 2026</div>
 <h4>Global MASLD cases projected to reach 1.8 billion by 2050</h4>
 <p>A global burden analysis found MASLD cases surged 142.7% between 1990 and 2023 — reaching an estimated 1.3 billion people, or roughly 1 in 6 adults worldwide — and are projected to climb to 1.8 billion by 2050 if current trends continue. Most of the projected growth comes from early-stage disease driven by rising rates of obesity, high blood sugar, and smoking, reinforcing prevention as the highest-leverage response.</p>
 </div>
-
 <div class="lh-research-card">
 <div class="lh-research-meta">Terminology · 2023–2026</div>
 <h4>NAFLD has been renamed MASLD</h4>
 <p>International experts introduced "metabolic dysfunction-associated steatotic liver disease" (MASLD) to better reflect the metabolic roots of the condition. Diagnosis now centers on steatosis plus at least one metabolic risk factor — such as type 2 diabetes, obesity, or high cholesterol — regardless of alcohol intake, which has broadened how the condition is studied and treated.</p>
 </div>
-
 <div class="lh-research-card">
 <div class="lh-research-meta">UNIST, Pusan National University &amp; Ulsan University Hospital · March 2026</div>
 <h4>A common B-vitamin shows promise against fatty liver</h4>
 <p>Researchers identified a microRNA (miR-93) that drives MASLD progression, and found that vitamin B3 (niacin) — an inexpensive, already-approved supplement — may help suppress it. It's early-stage research, not a proven treatment, but it points to a low-cost avenue worth watching.</p>
 </div>
-
 <div class="lh-research-card">
 <div class="lh-research-meta">UC San Diego · May 2026</div>
 <h4>New investigational drug targets MASH directly</h4>
 <p>Scientists identified a compound (ION224) designed to block a pathway involved in metabolic dysfunction–associated steatohepatitis (MASH), the more aggressive form of fatty liver disease that can progress to cirrhosis and liver cancer. It's in earlier-stage development, alongside other emerging MASLD/MASH drug candidates.</p>
 </div>
-
 <div class="lh-research-card">
 <div class="lh-research-meta">Lund University · February 2026</div>
 <h4>Gene-expression changes linked to liver fibrosis risk</h4>
 <p>An international team found altered expression of specific genes tied to liver fibrosis in people with obesity and MASLD, offering a possible new target for predicting or slowing disease progression. The team is now studying whether the link is causal.</p>
 </div>
-
 <div class="lh-research-card">
 <div class="lh-research-meta">Clinical guidance · 2026 update</div>
 <h4>Non-invasive testing is replacing routine biopsy</h4>
 <p>Updated clinical guidance increasingly favors non-invasive scoring tools — FIB-4, the ELF blood test, and elastography-based liver stiffness scans — over biopsy for staging fatty liver disease in most patients, making risk assessment more accessible.</p>
 </div>
-
 <div class="lh-disclaimer" style="margin-top:6px">These summaries are simplified for a general audience and may not reflect the full nuance of each study. Always check the original source and speak with a healthcare provider before changing any treatment.</div>
 </div>
-
 <!-- SUPPLEMENTS -->
 <div id="supplements" class="lh-section" role="tabpanel">
 <h2>Liver Support Supplements</h2>
 <div class="affiliate-banner"><strong>Advertising disclosure:</strong> This page contains affiliate links. If you buy through them, we may earn a commission at no extra cost to you. This never affects which information we present, and inclusion here is not a medical endorsement.</div>
 <p class="lh-subnote">Products featured here may be TGA-listed medicines, food-classified supplements, US dietary supplements regulated under FDA/DSHEA, or supplements notified under an EU member state's food supplement rules — each has a different regulatory basis, noted where relevant. Always consult your doctor before starting any supplement.</p>
-
 <div class="lh-region-picker" role="group" aria-label="Filter supplements by region">
 <span class="lh-region-label">Shopping from:</span>
 <button type="button" class="lh-region-btn active" data-region-filter="ALL" onclick="setRegion('ALL',this)">All Regions</button>
@@ -613,7 +559,6 @@ LiverHealthHub
 <button type="button" class="lh-region-btn" data-region-filter="US" onclick="setRegion('US',this)">🇺🇸 United States</button>
 <button type="button" class="lh-region-btn" data-region-filter="EU" onclick="setRegion('EU',this)">🇪🇺 European Union</button>
 </div>
-
 <div class="lh-affiliate" data-region="AU US EU">
 <div class="lh-affiliate-top"><h4>Milk Thistle (Silymarin)</h4><span class="lh-price-tag">From $19.95</span></div>
 <p>The most studied herbal supplement for liver support, often standardised to 80% silymarin, used for antioxidant and anti-inflammatory support.</p>
@@ -621,7 +566,6 @@ LiverHealthHub
 <div class="lh-affiliate-actions"><button class="lh-cta" onclick="alert('Add your affiliate link here, e.g. Chemist Warehouse, iHerb, or a specific brand partner.')">Shop Now →</button><button class="lh-cta secondary" onclick="toggleDetail(this)">Learn More</button></div>
 <div class="supp-detail"><strong>Key points:</strong><ul><li>Standardised extract: 140–420 mg silymarin daily</li><li>Best evidence for Amanita mushroom poisoning and toxin-related liver injury</li><li>Mixed evidence for MASLD; may modestly improve liver enzymes</li><li>Generally well tolerated; rare mild digestive upset</li><li>May interact with medications metabolised by CYP450 enzymes</li></ul></div>
 </div>
-
 <div class="lh-affiliate" data-region="AU US EU">
 <div class="lh-affiliate-top"><h4>N-Acetyl Cysteine (NAC)</h4><span class="lh-price-tag">From $24.50</span></div>
 <p>A precursor to glutathione, the liver's master antioxidant. NAC supports the body's natural detoxification pathways.</p>
@@ -629,7 +573,6 @@ LiverHealthHub
 <div class="lh-affiliate-actions"><button class="lh-cta" onclick="alert('Add your affiliate link here.')">Shop Now →</button><button class="lh-cta secondary" onclick="toggleDetail(this)">Learn More</button></div>
 <div class="supp-detail"><strong>Key points:</strong><ul><li>Common dose: 600–1,200 mg daily (medical supervision for higher doses)</li><li>Primary clinical use: paracetamol overdose antidote in hospitals</li><li>May support glutathione levels under oxidative stress</li><li>Some evidence for insulin resistance in PCOS/metabolic syndrome</li><li>Can cause nausea at higher doses — take with food</li></ul></div>
 </div>
-
 <div class="lh-affiliate" data-region="AU US EU">
 <div class="lh-affiliate-top"><h4>Vitamin E (Mixed Tocopherols)</h4><span class="lh-price-tag">From $16.90</span></div>
 <p>High-quality vitamin E is sometimes used for MASLD/MASH under medical supervision.</p>
@@ -637,7 +580,6 @@ LiverHealthHub
 <div class="lh-affiliate-actions"><button class="lh-cta" onclick="alert('Add your affiliate link here.')">Shop Now →</button><button class="lh-cta secondary" onclick="toggleDetail(this)">Learn More</button></div>
 <div class="supp-detail"><strong>Key points:</strong><ul><li>Studied dose for NASH: 800 IU/day of mixed tocopherols</li><li>Shown in some trials to reduce liver enzymes and steatosis</li><li>Not recommended for people with diabetes or heart disease without medical oversight</li><li>High doses may raise bleeding risk — stop before surgery</li><li>Look for "mixed tocopherols" rather than synthetic dl-alpha-tocopherol</li></ul></div>
 </div>
-
 <div class="lh-affiliate" data-region="AU US EU">
 <div class="lh-affiliate-top"><h4>Omega-3 Fish Oil</h4><span class="lh-price-tag">From $22.00</span></div>
 <p>High-EPA/DHA omega-3s may help reduce liver fat and inflammation markers in people with MASLD.</p>
@@ -645,18 +587,14 @@ LiverHealthHub
 <div class="lh-affiliate-actions"><button class="lh-cta" onclick="alert('Add your affiliate link here.')">Shop Now →</button><button class="lh-cta secondary" onclick="toggleDetail(this)">Learn More</button></div>
 <div class="supp-detail"><strong>Key points:</strong><ul><li>Effective dose: 2–4 g combined EPA+DHA daily</li><li>Associated with reduced liver fat and improved liver enzymes in meta-analyses</li><li>Also benefits triglycerides and cardiovascular health</li><li>Choose molecularly distilled products to avoid contaminants</li><li>May increase bleeding risk at high doses — caution with anticoagulants</li></ul></div>
 </div>
-
 <p class="lh-region-empty" id="regionEmptyMsg" style="display:none">No listed products match this region yet — check back soon, or use "All Regions" to see everything.</p>
-
 <div class="lh-affiliate" id="submit-product">
 <div class="lh-affiliate-top"><h4>Are You a Supplement Brand?</h4></div>
 <p>If you make a liver-support supplement that's legally sold in Australia, the United States, and/or the European Union and would like it considered for featuring on this page, submit your product details for review — including which regions it's legally available in. Every submission is checked before anything goes live.</p>
 <div class="lh-affiliate-actions"><a class="lh-cta" href="https://www.cognitoforms.com/masum4/supplierproductsubmissionliverhealthhub" target="_blank" rel="noopener">Submit Your Product →</a></div>
 </div>
-
 <div class="lh-disclaimer"><strong>Important:</strong> This site is for educational awareness only — not medical advice. Regulatory status varies by product: TGA listing (AUST L) or registration (AUST R) means a product is on the Australian Register of Therapeutic Goods, but does not mean the TGA has endorsed its effectiveness for liver disease. Some products are instead classified as foods under FSANZ, or as dietary supplements in the United States under FDA/DSHEA — in the US, the FDA does not review or approve supplements before they're sold. None of these classifications are a guarantee of safety or effectiveness. Always consult a qualified healthcare provider before taking any supplement, especially with existing liver conditions or other medications.</div>
 </div>
-
 <!-- CALCULATOR -->
 <div id="calculator" class="lh-section" role="tabpanel">
 <h2>Liver Health Risk Calculator</h2>
@@ -677,7 +615,6 @@ LiverHealthHub
 <div style="text-align:center;margin-top:8px"><button class="lh-cta" onclick="runCalc()">Calculate My Risk</button></div>
 <div class="calc-result" id="calc-result"><h4 id="calc-title"></h4><div class="calc-bmi" id="calc-bmi"></div><p id="calc-msg" style="margin:0;font-size:13.5px;color:var(--ink-soft)"></p></div>
 </div>
-
 <div class="fli-widget">
 <div class="fli-widget-header">
 <p class="fli-eyebrow">Educational estimate · not a medical test</p>
@@ -699,20 +636,17 @@ LiverHealthHub
 <p class="fli-unit-note">GGT and triglycerides come from a standard blood/liver panel. Not sure which unit your lab used for triglycerides? US labs usually report mg/dL; most labs in Australia, the UK, and the EU report mmol/L — check your results sheet if unsure.</p>
 <div style="grid-column:1/-1;text-align:center;margin-top:4px"><button type="submit" class="lh-cta">Get My Estimate</button></div>
 </form>
-
 <div class="fli-results" id="fli-results" aria-live="polite">
 <div class="fli-score-row"><span class="fli-score-num" id="fli-scoreNum">–</span><span class="fli-score-label">/ 100 · Liver Fat Estimate</span></div>
 <span class="fli-band-pill" id="fli-bandPill">–</span>
 <div class="fli-meter"><div class="fli-marker" id="fli-marker" style="left:0%"></div></div>
 <div class="fli-zone-labels"><span>0 · Lower</span><span>30 · Mixed</span><span>60 · Higher</span><span>100</span></div>
 <div class="fli-explain" id="fli-explain"></div>
-
 <div class="lh-disclaimer"><strong>Not a diagnostic tool.</strong> This estimate is calculated using a formula published in peer-reviewed research (Bedogni et al., <em>BMC Gastroenterology</em>, 2006) for educational purposes only, so anyone who wants to verify the math can do so. It does not diagnose fatty liver disease or any other condition and is not a substitute for professional medical advice. Whatever your result, only a healthcare provider — using proper testing such as blood work or an ultrasound — can tell you what's actually happening with your liver.</div>
 </div>
 </div>
 </div>
 </div>
-
 <!-- SELF-CHECK -->
 <div id="check" class="lh-section" role="tabpanel">
 <h2>Liver Health Self-Check</h2>
@@ -731,7 +665,6 @@ LiverHealthHub
 <div class="lh-score"><div class="lh-score-num" id="scoreNum">0/8</div><div class="lh-score-label" id="scoreLabel">Check items above to see your awareness score</div></div>
 <div style="text-align:center"><button class="lh-cta" onclick="alert('Consult a healthcare provider for personalised guidance based on your self-check results.')">Get Guidance</button></div>
 </div>
-
 <div class="footer">
 <div style="font-weight:600;color:var(--ink);margin-bottom:6px">About This Site</div>
 LiverHealthHub is an independent educational project — it isn't a medical practice, clinic, or affiliated with any hospital or health system. It's maintained by one person, motivated by how common and how preventable most liver disease actually is, with the goal of turning scattered medical research into plain-language guidance people can actually use.<br><br>
@@ -740,9 +673,7 @@ Built with reference to how major health publishers (Mayo Clinic, Healthline, NH
 © 2026 LiverHealthHub (liverhealthhub.com). For educational purposes only. Not medical advice.<br>
 Always consult a qualified healthcare provider for diagnosis and treatment.
 </div>
-
 </div>
-
 <script>
 function showSection(id){
   document.querySelectorAll('.lh-section').forEach(s=>s.classList.remove('active'));
@@ -753,6 +684,12 @@ function navTo(id, btn){
   showSection(id);
   document.querySelectorAll('.nav-dropdown button').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
+  document.querySelectorAll('.nav-group > button').forEach(b=>b.classList.remove('current'));
+  const matchingItem = document.querySelector('.nav-dropdown button[data-tab="'+id+'"]');
+  if(matchingItem){
+    const group = matchingItem.closest('.nav-group');
+    if(group) group.querySelector(':scope > button').classList.add('current');
+  }
   closeAllNavGroups();
   document.getElementById('headerInner').classList.remove('mobile-open');
 }
@@ -824,7 +761,6 @@ function runCalc(){
   document.getElementById('calc-title').textContent = title;
   document.getElementById('calc-msg').textContent = msg;
 }
-
 /* Fatty Liver Index (FLI) calculator — Bedogni et al., BMC Gastroenterology 2006 */
 (function(){
   const fliForm = document.getElementById('fli-form');
@@ -856,10 +792,8 @@ function runCalc(){
     const x = 0.953*Math.log(trig) + 0.139*bmi + 0.718*Math.log(ggt) + 0.053*waist - 15.745;
     const fli = (Math.exp(x) / (1 + Math.exp(x))) * 100;
     const fliClamped = Math.min(100, Math.max(0, fli));
-
     document.getElementById('fli-scoreNum').textContent = fliClamped.toFixed(1);
     document.getElementById('fli-marker').style.left = fliClamped + '%';
-
     const pillEl = document.getElementById('fli-bandPill');
     const explainEl = document.getElementById('fli-explain');
     let band, pillBg, pillColor, explainClass, explainHtml;
@@ -878,7 +812,6 @@ function runCalc(){
     pillEl.style.color = pillColor;
     explainEl.className = 'fli-explain ' + explainClass;
     explainEl.innerHTML = explainHtml;
-
     const resultsEl = document.getElementById('fli-results');
     resultsEl.classList.add('show');
     resultsEl.classList.remove('just-shown');
