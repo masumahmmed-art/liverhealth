@@ -272,6 +272,26 @@ h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;
 .fli-explain.mid{background:var(--wn-bg)}
 .fli-explain.high{background:var(--dg-bg)}
 
+/* Liver Fibrosis Score (FIB-4 / APRI) widget — reuses fli- readout components, own field/layout classes */
+.lfs-widget{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);max-width:640px;overflow:hidden;margin-top:24px}
+.lfs-widget-header{padding:22px 24px 18px;border-bottom:1px solid var(--line)}
+.lfs-widget-header h3{font-size:18px;margin:0 0 8px}
+.lfs-widget-body{padding:22px 24px 24px}
+.lfs-form{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px}
+.lfs-field{display:flex;flex-direction:column;gap:5px}
+.lfs-field label{font-size:12.5px;font-weight:500;color:var(--ink-soft);display:flex;align-items:center;gap:6px}
+.lfs-field label .fli-hint{font-weight:400;font-size:11px}
+.lfs-field input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;font-size:13.5px;font-family:inherit;background:#fff}
+.lfs-field input:focus{outline:2px solid var(--tp);outline-offset:1px;border-color:var(--tp)}
+.lfs-results{display:none;margin-top:22px;padding-top:20px;border-top:1px dashed var(--line);scroll-margin-top:78px}
+.lfs-results.show{display:block}
+.lfs-results.just-shown{animation:fliPulse 1.4s ease}
+.lfs-score-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:16px}
+.lfs-score-head{display:flex;flex-direction:column;gap:1px;margin-bottom:8px}
+.lfs-score-name{font-family:'Fraunces',serif;font-weight:600;font-size:16px;color:var(--ink)}
+.lfs-score-full{font-size:11px;color:var(--ink-soft)}
+@media(max-width:640px){.lfs-form{grid-template-columns:1fr}.lfs-score-grid{grid-template-columns:1fr}}
+
 /* checklist */
 .lh-checklist{list-style:none;padding:0;margin:0 0 18px;display:flex;flex-direction:column;gap:8px}
 .lh-check-item{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;cursor:pointer}
@@ -721,6 +741,52 @@ LiverHealthHub
 </div>
 </div>
 
+<div class="lfs-widget">
+<div class="lfs-widget-header">
+<p class="fli-eyebrow">Educational estimate · not a medical test</p>
+<h3>Curious About Liver Scarring? Check These Two Scores</h3>
+<p class="fli-lede">If your fat estimate above came back mixed — or you've already had bloodwork done — these two scores go a level deeper. <strong>FIB-4</strong> and <strong>APRI</strong> are the non-invasive scores doctors actually use to decide who needs further testing for liver scarring (fibrosis), calculated from the same blood panel and complete blood count (CBC) used above.</p>
+<div class="lh-disclaimer" style="margin-top:14px"><strong>This is not a diagnostic tool.</strong> Whatever your result — low, indeterminate, or high — it should be verified by a doctor or other qualified healthcare professional, who can arrange proper testing to find out what's actually going on with your liver.</div>
+</div>
+<div class="lfs-widget-body">
+<form id="lfs-form" novalidate>
+<div class="lfs-form">
+<div class="lfs-field"><label for="lfs-age">Age <span class="fli-hint">(years)</span></label><input type="number" id="lfs-age" placeholder="e.g. 52" min="18" max="120" step="1" required></div>
+<div class="lfs-field"><label for="lfs-plt">Platelets <span class="fli-hint">(×10⁹/L)</span></label><input type="number" id="lfs-plt" placeholder="e.g. 210" min="1" max="1000" step="1" required></div>
+<div class="lfs-field"><label for="lfs-ast">AST <span class="fli-hint">(U/L)</span></label><input type="number" id="lfs-ast" placeholder="e.g. 30" min="1" max="2000" step="0.1" required></div>
+<div class="lfs-field"><label for="lfs-alt">ALT <span class="fli-hint">(U/L)</span></label><input type="number" id="lfs-alt" placeholder="e.g. 28" min="1" max="2000" step="0.1" required></div>
+<p class="fli-unit-note" style="grid-column:1/-1">All four values come from a standard liver panel and complete blood count (CBC) — most pathology reports list age, AST, ALT, and platelet count together.</p>
+<div style="grid-column:1/-1;text-align:center;margin-top:4px"><button type="submit" class="lh-cta">Calculate My Scores</button></div>
+</div>
+</form>
+
+<div class="lfs-results" id="lfs-results" aria-live="polite">
+<div class="lfs-score-grid">
+
+<div>
+<div class="lfs-score-head"><span class="lfs-score-name">FIB-4</span><span class="lfs-score-full">Fibrosis-4 Index</span></div>
+<div class="fli-score-row"><span class="fli-score-num" id="lfs-fib4-num">–</span></div>
+<span class="fli-band-pill" id="lfs-fib4-pill">–</span>
+<div class="fli-meter" id="lfs-fib4-meter"><div class="fli-marker" id="lfs-fib4-marker" style="left:0%"></div></div>
+<div class="fli-zone-labels"><span>0</span><span>1.30</span><span>2.67</span><span>5.0+</span></div>
+<div class="fli-explain" id="lfs-fib4-explain"></div>
+</div>
+
+<div>
+<div class="lfs-score-head"><span class="lfs-score-name">APRI</span><span class="lfs-score-full">AST-to-Platelet Ratio Index</span></div>
+<div class="fli-score-row"><span class="fli-score-num" id="lfs-apri-num">–</span></div>
+<span class="fli-band-pill" id="lfs-apri-pill">–</span>
+<div class="fli-meter" id="lfs-apri-meter"><div class="fli-marker" id="lfs-apri-marker" style="left:0%"></div></div>
+<div class="fli-zone-labels"><span>0</span><span>0.5</span><span>1.5</span><span>2.5+</span></div>
+<div class="fli-explain" id="lfs-apri-explain"></div>
+</div>
+
+</div>
+<div class="lh-disclaimer"><strong>Limitations to know:</strong> FIB-4 tends to overestimate risk in people over 65 and in those with diabetes or obesity, and neither score has been validated in people under 18 — treat an indeterminate or high result as a reason to talk to a doctor, not a diagnosis. Sources: Sterling et al., <em>Hepatology</em>, 2006 (FIB-4) · Wai et al., <em>Hepatology</em>, 2003 (APRI).</div>
+</div>
+</div>
+</div>
+
 <!-- SELF-CHECK -->
 <div id="check" class="lh-section" role="tabpanel">
 <h2>Liver Health Self-Check</h2>
@@ -904,6 +970,79 @@ function runCalc(){
     void resultsEl.offsetWidth; // restart the highlight animation on repeat calculations
     resultsEl.classList.add('just-shown');
     resultsEl.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+})();
+
+/* Liver Fibrosis Score calculator — FIB-4 (Sterling et al., Hepatology 2006) and APRI (Wai et al., Hepatology 2003) */
+(function(){
+  const lfsForm = document.getElementById('lfs-form');
+  if(!lfsForm) return;
+  lfsForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    const age = parseFloat(document.getElementById('lfs-age').value);
+    const plt = parseFloat(document.getElementById('lfs-plt').value);
+    const ast = parseFloat(document.getElementById('lfs-ast').value);
+    const alt = parseFloat(document.getElementById('lfs-alt').value);
+    const lfsFields = [
+      {id:'lfs-age', name:'Age', val:age},
+      {id:'lfs-plt', name:'Platelets', val:plt},
+      {id:'lfs-ast', name:'AST', val:ast},
+      {id:'lfs-alt', name:'ALT', val:alt}
+    ];
+    const lfsBadField = lfsFields.find(function(f){ return isNaN(f.val) || f.val <= 0; });
+    if(lfsBadField){
+      alert('Please enter a valid, positive number for "'+lfsBadField.name+'" before calculating.');
+      document.getElementById(lfsBadField.id).focus();
+      return;
+    }
+
+    function paintScore(prefix, value, lowMax, highMin, maxScale, lowTxt, midTxt, highTxt){
+      const numEl = document.getElementById('lfs-'+prefix+'-num');
+      const pillEl = document.getElementById('lfs-'+prefix+'-pill');
+      const meterEl = document.getElementById('lfs-'+prefix+'-meter');
+      const markerEl = document.getElementById('lfs-'+prefix+'-marker');
+      const explainEl = document.getElementById('lfs-'+prefix+'-explain');
+      numEl.textContent = value.toFixed(2);
+      const lowPct = (lowMax/maxScale*100).toFixed(1);
+      const highPct = (highMin/maxScale*100).toFixed(1);
+      meterEl.style.background = 'linear-gradient(to right,var(--ps) 0%,var(--ps) '+lowPct+'%,var(--wn) '+lowPct+'%,var(--wn) '+highPct+'%,var(--dg) '+highPct+'%,var(--dg) 100%)';
+      const markerPct = Math.min(100, Math.max(0, value/maxScale*100));
+      markerEl.style.left = markerPct + '%';
+      let band, pillBg, pillColor, explainClass, explainHtml;
+      if(value < lowMax){
+        band = 'Low'; pillBg = 'var(--ps-bg)'; pillColor = 'var(--ps)'; explainClass = 'low'; explainHtml = lowTxt;
+      } else if(value < highMin){
+        band = 'Indeterminate'; pillBg = 'var(--wn-bg)'; pillColor = 'var(--wn)'; explainClass = 'mid'; explainHtml = midTxt;
+      } else {
+        band = 'High'; pillBg = 'var(--dg-bg)'; pillColor = 'var(--dg)'; explainClass = 'high'; explainHtml = highTxt;
+      }
+      pillEl.textContent = band;
+      pillEl.style.background = pillBg;
+      pillEl.style.color = pillColor;
+      explainEl.className = 'fli-explain ' + explainClass;
+      explainEl.innerHTML = explainHtml;
+    }
+
+    const fib4 = (age * ast) / (plt * Math.sqrt(alt));
+    paintScore('fib4', fib4, 1.30, 2.67, 5.0,
+      'Your FIB-4 score of '+fib4.toFixed(2)+' falls in the low range — advanced liver scarring is unlikely based on this formula alone. <strong>This is not a diagnosis.</strong> Keep up routine check-ups, and mention this score to your doctor if you have other liver-related concerns.',
+      'Your FIB-4 score of '+fib4.toFixed(2)+' falls in the indeterminate range (1.30–2.67) — on its own, this can\'t rule fibrosis in or out. <strong>This is not a diagnosis.</strong> A doctor can weigh your full picture and decide whether further testing, like elastography, makes sense.',
+      'Your FIB-4 score of '+fib4.toFixed(2)+' falls in the high range — this pattern is more often seen in people with more advanced liver scarring. <strong>This is not a diagnosis.</strong> Please discuss this score with a healthcare provider, who can arrange proper testing to find out what\'s actually going on.'
+    );
+
+    const apri = (ast / 40 * 100) / plt;
+    paintScore('apri', apri, 0.5, 1.5, 2.5,
+      'Your APRI score of '+apri.toFixed(2)+' falls in the low range — significant liver scarring is unlikely based on this formula alone. <strong>This is not a diagnosis.</strong> Keep up routine check-ups, and mention this score to your doctor if you have other liver-related concerns.',
+      'Your APRI score of '+apri.toFixed(2)+' falls in the indeterminate range (0.5–1.5) — on its own, this can\'t rule fibrosis in or out. <strong>This is not a diagnosis.</strong> A doctor can weigh your full picture and decide whether further testing makes sense.',
+      'Your APRI score of '+apri.toFixed(2)+' falls in the high range — this pattern is more often seen in people with more significant liver scarring. <strong>This is not a diagnosis.</strong> Please discuss this score with a healthcare provider, who can arrange proper testing to find out what\'s actually going on.'
+    );
+
+    const lfsResultsEl = document.getElementById('lfs-results');
+    lfsResultsEl.classList.add('show');
+    lfsResultsEl.classList.remove('just-shown');
+    void lfsResultsEl.offsetWidth;
+    lfsResultsEl.classList.add('just-shown');
+    lfsResultsEl.scrollIntoView({behavior:'smooth', block:'start'});
   });
 })();
 </script>
