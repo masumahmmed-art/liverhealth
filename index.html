@@ -737,6 +737,37 @@ LiverHealthHub
 </div>
 </div>
 </div>
+
+<div class="fli-widget">
+<div class="fli-widget-header">
+<p class="fli-eyebrow">Educational estimate · not a medical test</p>
+<h3>Want a Deeper Look? Try the FIB-4 Estimate</h3>
+<p class="fli-lede">FIB-4 is a formula used in liver research that combines your age with three common blood-panel values to produce a single estimate. It's often used as a first-pass check before deciding whether more detailed liver testing is worth pursuing.</p>
+<p class="fli-lede" style="margin-top:12px"><strong>What these numbers mean:</strong> <strong>AST</strong> and <strong>ALT</strong> are liver enzymes reported on a standard blood/liver panel — both tend to rise when liver cells are under strain or being damaged. Your <strong>platelet count</strong> comes from a routine complete blood count (CBC); platelet levels can drop as liver scarring (fibrosis) becomes more advanced. The formula combines these with age because fibrosis becomes more common — and the formula less precise — later in life.</p>
+<div class="lh-disclaimer" style="margin-top:14px"><strong>This is not a diagnostic tool.</strong> It cannot diagnose liver fibrosis, cirrhosis, or any other condition. Whatever your result — lower, mixed, or higher — it should be verified by a doctor or other qualified healthcare professional, who can arrange proper testing to find out what's actually going on with your liver.</div>
+</div>
+<div class="fli-widget-body">
+<form id="fib4-form" novalidate>
+<div class="fli-field"><label for="fib4-age">Age <span class="fli-hint">(years)</span></label><input type="number" id="fib4-age" placeholder="e.g. 45" min="18" max="110" step="1" required></div>
+<div class="fli-field"><label for="fib4-ast">AST <span class="fli-hint">(Aspartate Aminotransferase, U/L)</span></label><input type="number" id="fib4-ast" placeholder="e.g. 28" min="1" max="2000" step="0.1" required></div>
+<div class="fli-field"><label for="fib4-alt">ALT <span class="fli-hint">(Alanine Aminotransferase, U/L)</span></label><input type="number" id="fib4-alt" placeholder="e.g. 25" min="1" max="2000" step="0.1" required></div>
+<div class="fli-field"><label for="fib4-platelets">Platelet count <span class="fli-hint">(×10⁹/L, same number as ×10³/µL)</span></label><input type="number" id="fib4-platelets" placeholder="e.g. 250" min="5" max="1000" step="1" required></div>
+<p class="fli-unit-note" style="grid-column:1/-1">AST, ALT, and platelet count come from a standard blood panel and complete blood count (CBC) — your lab results sheet will have all three.</p>
+<div style="grid-column:1/-1;text-align:center;margin-top:4px"><button type="submit" class="lh-cta">Get My Estimate</button></div>
+</form>
+
+<div class="fli-results" id="fib4-results" aria-live="polite">
+<div class="fli-score-row"><span class="fli-score-num" id="fib4-scoreNum">–</span><span class="fli-score-label">FIB-4 Index</span></div>
+<span class="fli-band-pill" id="fib4-bandPill">–</span>
+<div class="fli-meter" id="fib4-meter"><div class="fli-marker" id="fib4-marker" style="left:0%"></div></div>
+<div class="fli-zone-labels"><span>0 · Lower</span><span id="fib4-zoneMid">– · Mixed</span><span id="fib4-zoneHigh">2.67 · Higher</span><span id="fib4-zoneMax">4.5+</span></div>
+<div class="fli-explain" id="fib4-explain"></div>
+<p class="fli-unit-note" id="fib4-ageNote" style="margin-top:-6px"></p>
+
+<div class="lh-disclaimer"><strong>Not a diagnostic tool.</strong> This estimate is calculated using the FIB-4 formula (age × AST ÷ [platelets × √ALT]), a widely studied index in liver fibrosis research, shown here for educational purposes so anyone who wants to verify the math can do so. It does not diagnose liver fibrosis, cirrhosis, or any other condition and is not a substitute for professional medical advice. Whatever your result, only a healthcare provider — using proper testing such as imaging or a biopsy — can tell you what's actually happening with your liver.</div>
+</div>
+</div>
+</div>
 </div>
 
 <!-- SELF-CHECK -->
@@ -917,6 +948,79 @@ function runCalc(){
     explainEl.innerHTML = explainHtml;
 
     const resultsEl = document.getElementById('fli-results');
+    resultsEl.classList.add('show');
+    resultsEl.classList.remove('just-shown');
+    void resultsEl.offsetWidth; // restart the highlight animation on repeat calculations
+    resultsEl.classList.add('just-shown');
+    resultsEl.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+})();
+
+/* FIB-4 Index calculator — age-adjusted cutoffs per published liver-fibrosis research */
+(function(){
+  const fib4Form = document.getElementById('fib4-form');
+  if(!fib4Form) return;
+  const DISPLAY_MAX = 4.5;
+  fib4Form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const age = parseFloat(document.getElementById('fib4-age').value);
+    const ast = parseFloat(document.getElementById('fib4-ast').value);
+    const alt = parseFloat(document.getElementById('fib4-alt').value);
+    const plt = parseFloat(document.getElementById('fib4-platelets').value);
+    const fib4Fields = [
+      {id:'fib4-age', name:'Age', val:age},
+      {id:'fib4-ast', name:'AST', val:ast},
+      {id:'fib4-alt', name:'ALT', val:alt},
+      {id:'fib4-platelets', name:'Platelet count', val:plt}
+    ];
+    const fib4BadField = fib4Fields.find(function(f){ return isNaN(f.val) || f.val <= 0; });
+    if(fib4BadField){
+      alert('Please enter a valid, positive number for "'+fib4BadField.name+'" before calculating.');
+      document.getElementById(fib4BadField.id).focus();
+      return;
+    }
+
+    const score = (age * ast) / (plt * Math.sqrt(alt));
+    const isOlder = age >= 65;
+    const lowCutoff = isOlder ? 2.00 : 1.30;
+    const highCutoff = 2.67;
+
+    document.getElementById('fib4-scoreNum').textContent = score.toFixed(2);
+    const markerPct = Math.min(100, Math.max(0, (score / DISPLAY_MAX) * 100));
+    document.getElementById('fib4-marker').style.left = markerPct + '%';
+
+    const lowPct = (lowCutoff / DISPLAY_MAX) * 100;
+    const highPct = (highCutoff / DISPLAY_MAX) * 100;
+    document.getElementById('fib4-meter').style.background = 'linear-gradient(to right, var(--ps) 0%, var(--ps) '+lowPct+'%, var(--wn) '+lowPct+'%, var(--wn) '+highPct+'%, var(--dg) '+highPct+'%, var(--dg) 100%)';
+    document.getElementById('fib4-zoneMid').textContent = lowCutoff.toFixed(2) + ' · Mixed';
+    document.getElementById('fib4-zoneHigh').textContent = highCutoff.toFixed(2) + ' · Higher';
+    document.getElementById('fib4-zoneMax').textContent = DISPLAY_MAX + '+';
+
+    const pillEl = document.getElementById('fib4-bandPill');
+    const explainEl = document.getElementById('fib4-explain');
+    let band, pillBg, pillColor, explainClass, explainHtml;
+    if(score < lowCutoff){
+      band = 'Lower'; pillBg = 'var(--ps-bg)'; pillColor = 'var(--ps)'; explainClass = 'low';
+      explainHtml = 'Your estimate of '+score.toFixed(2)+' falls in the lower range — this pattern is not typically associated with advanced liver scarring (fibrosis). <strong>This is not a diagnosis.</strong> Keep up routine check-ups, and mention this estimate to your doctor if you have any liver-related symptoms or concerns.';
+    } else if(score <= highCutoff){
+      band = 'Mixed'; pillBg = 'var(--wn-bg)'; pillColor = 'var(--wn)'; explainClass = 'mid';
+      explainHtml = 'Your estimate of '+score.toFixed(2)+' falls in the mixed range ('+lowCutoff.toFixed(2)+'–'+highCutoff.toFixed(2)+') — on its own, this estimate can\'t say much either way. <strong>This is not a diagnosis.</strong> A conversation with a doctor about further testing is the best way to find out more.';
+    } else {
+      band = 'Higher'; pillBg = 'var(--dg-bg)'; pillColor = 'var(--dg)'; explainClass = 'high';
+      explainHtml = 'Your estimate of '+score.toFixed(2)+' falls in the higher range — this pattern is more often seen in people with more advanced liver scarring. <strong>This is not a diagnosis.</strong> Please discuss this estimate with a healthcare provider, who can arrange proper testing (such as imaging or a specialist referral) to find out what\'s actually going on.';
+    }
+    pillEl.textContent = band;
+    pillEl.style.background = pillBg;
+    pillEl.style.color = pillColor;
+    explainEl.className = 'fli-explain ' + explainClass;
+    explainEl.innerHTML = explainHtml;
+
+    const ageNoteEl = document.getElementById('fib4-ageNote');
+    ageNoteEl.textContent = isOlder
+      ? 'Because you entered an age of 65 or older, the lower cutoff used above is 2.00 instead of 1.30 — the standard formula is known to be less precise in older adults, so the threshold is raised accordingly.'
+      : 'Cutoffs shown above are for adults under 65. The lower cutoff rises to 2.00 (from 1.30) for those 65 and older, since the standard formula is less precise in older adults.';
+
+    const resultsEl = document.getElementById('fib4-results');
     resultsEl.classList.add('show');
     resultsEl.classList.remove('just-shown');
     void resultsEl.offsetWidth; // restart the highlight animation on repeat calculations
